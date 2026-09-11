@@ -28,22 +28,22 @@ export const ProgressionTree: React.FC<ProgressionTreeProps> = ({ user }) => {
               <div
                 className={`w-[42%] rounded-2xl border p-5 transition-all ${
                   isCurrent
-                    ? 'border-amber-400 bg-amber-50/90 text-gray-900 shadow-md'
+                    ? 'border-amber-300 bg-amber-50 text-gray-900 shadow-sm'
                     : isUnlocked
-                    ? 'border-emerald-200 bg-emerald-50/80 text-gray-900 shadow-sm'
-                    : 'border-gray-200 bg-gray-50 opacity-60 text-gray-700'
+                    ? 'border-emerald-200 bg-white text-gray-900 shadow-sm'
+                    : 'border-gray-200 bg-gray-50 text-gray-400 opacity-60'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-extrabold uppercase text-[#10b981]">
+                  <span className="font-mono text-xs font-bold uppercase text-[#10b981]">
                     Level {tier.level}
                   </span>
-                  <span className="font-mono text-xs font-bold text-amber-600">
+                  <span className="font-mono text-xs font-bold text-amber-700">
                     {tier.minXP} XP Required
                   </span>
                 </div>
 
-                <h3 className="mt-2 text-lg font-bold text-gray-900">
+                <h3 className="mt-2 text-lg font-extrabold text-gray-900">
                   {tier.title} {isCurrent && ' (YOU ARE HERE)'}
                 </h3>
 
@@ -61,7 +61,7 @@ export const ProgressionTree: React.FC<ProgressionTreeProps> = ({ user }) => {
                     ? 'border-amber-400 bg-amber-400 text-gray-900 shadow-md scale-110'
                     : isUnlocked
                     ? 'border-[#10b981] bg-[#10b981] text-white'
-                    : 'border-gray-300 bg-gray-200 text-gray-500'
+                    : 'border-gray-300 bg-gray-100 text-gray-400'
                 }`}
               >
                 {isUnlocked ? '✓' : tier.level}

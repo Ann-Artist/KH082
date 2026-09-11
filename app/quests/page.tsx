@@ -117,12 +117,12 @@ export default function QuestsPage(props: any) {
   };
 
   return (
-    <div className="space-y-6 pb-20 md:pb-8 font-sans">
+    <div className="space-y-6 pb-20 md:pb-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Sustainability Quests Hub</h1>
-          <p className="text-xs text-gray-600">Turn real-world Pune actions into EcoXP, badges & streaks.</p>
+          <p className="text-xs text-gray-600 font-medium">Turn real-world Pune actions into EcoXP, badges & streaks.</p>
         </div>
 
         {/* Filter Controls */}
@@ -130,7 +130,7 @@ export default function QuestsPage(props: any) {
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-900 shadow-sm focus:border-[#10b981] focus:outline-none"
+            className="rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-xs font-bold text-gray-800 focus:border-[#10b981] focus:outline-none shadow-sm"
           >
             <option value="all">All Categories</option>
             <option value="transportation">Transportation</option>
@@ -143,7 +143,7 @@ export default function QuestsPage(props: any) {
           <select
             value={filterDuration}
             onChange={(e) => setFilterDuration(e.target.value)}
-            className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-xs font-bold text-gray-900 shadow-sm focus:border-[#10b981] focus:outline-none"
+            className="rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-xs font-bold text-gray-800 focus:border-[#10b981] focus:outline-none shadow-sm"
           >
             <option value="all">All Durations</option>
             <option value="Daily">Daily</option>
@@ -192,19 +192,19 @@ export default function QuestsPage(props: any) {
 
       {aiSwapModal.isOpen && aiSwapModal.rec && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl text-gray-900">
-            <div className="flex items-center gap-2 text-[#10b981]">
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-[#6bfb9a]/30 bg-[#121b16] p-6 shadow-2xl">
+            <div className="flex items-center gap-2 text-[#6bfb9a]">
               <span className="material-symbols-outlined text-2xl">swap_horiz</span>
-              <h3 className="text-lg font-bold text-gray-900">AI Alternative Recommended</h3>
+              <h3 className="font-headline-lg text-lg font-bold text-white">AI Alternative Recommended</h3>
             </div>
-            <p className="mt-3 text-xs font-semibold text-gray-800">{aiSwapModal.rec.alternativeTitle}</p>
-            <p className="mt-1 text-xs text-gray-600">{aiSwapModal.rec.alternativeDescription}</p>
-            <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-3 text-[11px] font-mono text-emerald-800">
+            <p className="mt-3 text-xs font-semibold text-white">{aiSwapModal.rec.alternativeTitle}</p>
+            <p className="mt-1 text-xs text-[#bccabb]">{aiSwapModal.rec.alternativeDescription}</p>
+            <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3 text-[11px] font-mono text-[#6bfb9a]">
               💡 {aiSwapModal.rec.reason}
             </div>
             <button
               onClick={() => setAiSwapModal({ isOpen: false, quest: null, rec: null })}
-              className="mt-5 w-full rounded-xl bg-[#111827] py-2.5 text-xs font-bold text-white hover:bg-black"
+              className="mt-5 w-full rounded-xl bg-[#6bfb9a] py-2.5 text-xs font-bold text-[#003919]"
             >
               Got It - Close
             </button>

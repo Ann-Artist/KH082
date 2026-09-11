@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AgeGroup, PuneWard, LifestyleInputs, CarbonResult, UserProfile } from '@/types';
-import { AgeGroupPage } from './age-group/page';
-import { LocationPage } from './location/page';
-import { LifestylePage } from './lifestyle/page';
-import { ResultPage } from './result/page';
+import AgeGroupPage from './age-group/page';
+import LocationPage from './location/page';
+import LifestylePage from './lifestyle/page';
+import ResultPage from './result/page';
 import { getStoredLifestyleInputs, saveLifestyleInputs, getStoredUserProfile, saveUserProfile } from '../../lib/storage';
 
 export default function OnboardingHubPage(props: any) {
@@ -61,10 +61,10 @@ export default function OnboardingHubPage(props: any) {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#0b110e] px-4 py-10 text-white">
-      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[#6bfb9a]/15 blur-3xl" />
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#061910] via-[#0b271c] to-[#030d08] px-4 py-10 text-gray-900">
+      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-emerald-500/10 blur-3xl" />
 
-      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-[#6bfb9a]/20 bg-[#121b16]/95 p-6 md:p-8 backdrop-blur-2xl shadow-2xl">
+      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-2xl">
         {step === 1 && <AgeGroupPage onNext={handleAgeGroupNext} />}
         {step === 2 && <LocationPage onNext={handleLocationNext} />}
         {step === 3 && <LifestylePage initialInputs={inputs} onNext={handleLifestyleNext} />}

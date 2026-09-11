@@ -7,7 +7,8 @@ interface AgeGroupPageProps {
   onNext: (ageGroup: AgeGroup) => void;
 }
 
-export const AgeGroupPage: React.FC<AgeGroupPageProps> = ({ onNext }) => {
+export default function AgeGroupPage(props: any) {
+  const onNext = props?.onNext || (() => {});
   const [selected, setSelected] = useState<AgeGroup>('Gen Z / Young Adult');
 
   const options: { id: AgeGroup; title: string; desc: string; icon: string }[] = [
@@ -20,9 +21,9 @@ export const AgeGroupPage: React.FC<AgeGroupPageProps> = ({ onNext }) => {
   return (
     <div className="space-y-6 text-left">
       <div>
-        <span className="font-mono text-xs font-bold text-[#6bfb9a]">STEP 1 OF 4 • ONBOARDING</span>
-        <h2 className="font-headline-lg text-2xl font-bold text-white mt-1">Select Your Age Group Category</h2>
-        <p className="text-xs text-[#bccabb]">Personalizes your UI presentation, quest complexity & recommended challenges.</p>
+        <span className="font-mono text-xs font-bold text-[#10b981]">STEP 1 OF 4 • ONBOARDING</span>
+        <h2 className="text-2xl font-extrabold text-gray-900 mt-1">Select Your Age Group Category</h2>
+        <p className="text-xs text-gray-600 font-medium">Personalizes your UI presentation, quest complexity & recommended challenges.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -32,27 +33,25 @@ export const AgeGroupPage: React.FC<AgeGroupPageProps> = ({ onNext }) => {
             onClick={() => setSelected(opt.id)}
             className={`cursor-pointer rounded-2xl border p-4 transition-all ${
               selected === opt.id
-                ? 'border-[#6bfb9a] bg-[#6bfb9a]/20 text-[#6bfb9a] shadow-[0_0_20px_rgba(107,251,154,0.15)]'
-                : 'border-white/10 bg-black/40 text-[#bccabb] hover:border-white/20'
+                ? 'border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm'
+                : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300'
             }`}
           >
             <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-2xl">{opt.icon}</span>
-              <h3 className="font-title-md font-bold text-white text-sm">{opt.title}</h3>
+              <span className="material-symbols-outlined text-2xl text-[#10b981]">{opt.icon}</span>
+              <h3 className="font-bold text-gray-900 text-sm">{opt.title}</h3>
             </div>
-            <p className="mt-2 text-xs text-[#bccabb] leading-relaxed">{opt.desc}</p>
+            <p className="mt-2 text-xs text-gray-600 leading-relaxed font-medium">{opt.desc}</p>
           </div>
         ))}
       </div>
 
       <button
         onClick={() => onNext(selected)}
-        className="w-full rounded-2xl bg-[#6bfb9a] py-3 text-sm font-bold text-[#003919] hover:bg-[#59e68a] transition-all"
+        className="w-full rounded-2xl bg-[#111827] py-3 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
       >
         Continue to Location Setup →
       </button>
     </div>
   );
-};
-
-export default AgeGroupPage;
+}

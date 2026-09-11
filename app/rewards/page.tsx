@@ -53,11 +53,11 @@ export default function RewardsPage(props: any) {
   };
 
   return (
-    <div className="space-y-8 pb-20 md:pb-8 font-sans">
+    <div className="space-y-8 pb-20 md:pb-8">
       {/* Header */}
       <div>
         <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Reward Campaign Simulation</h1>
-        <p className="text-xs text-gray-600">Simulated Pune municipal & green partner incentive campaigns.</p>
+        <p className="text-xs text-gray-600 font-medium">Simulated Pune municipal & green partner incentive campaigns.</p>
       </div>
 
       {/* Campaign Cards List */}
@@ -66,31 +66,31 @@ export default function RewardsPage(props: any) {
           const isClaimed = claimedCampaigns[camp.id];
 
           return (
-            <GlassCard key={camp.id} glow={camp.isEligible} className="flex flex-col justify-between p-6 border border-gray-200">
+            <GlassCard key={camp.id} glow={camp.isEligible} className="flex flex-col justify-between p-6">
               <div>
                 <div className="mb-3 flex items-center justify-between">
                   <span className="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-0.5 font-mono text-xs font-bold text-amber-700">
                     {camp.rewardValue}
                   </span>
-                  <span className="text-[11px] font-mono text-gray-500 font-semibold">Valid: {camp.validUntil}</span>
+                  <span className="text-[11px] font-mono text-gray-500 font-medium">Valid: {camp.validUntil}</span>
                 </div>
 
-                <h3 className="text-base font-bold text-gray-900">{camp.title}</h3>
-                <p className="mt-1 font-mono text-xs font-bold text-[#10b981]">Sponsor: {camp.sponsor}</p>
+                <h3 className="text-base font-extrabold text-gray-900">{camp.title}</h3>
+                <p className="mt-1 font-mono text-xs text-emerald-700 font-bold">Sponsor: {camp.sponsor}</p>
                 <p className="mt-3 text-xs text-gray-600 leading-relaxed font-medium">{camp.description}</p>
 
                 {/* Requirements Progress */}
                 <div className="mt-5 space-y-2 rounded-2xl border border-gray-200 bg-gray-50 p-3 font-mono text-xs">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">EcoXP ({camp.requiredXP} XP):</span>
-                    <span className={user.ecoXP >= camp.requiredXP ? 'text-[#10b981] font-bold' : 'text-rose-600 font-bold'}>
+                    <span className="text-gray-600 font-medium">EcoXP ({camp.requiredXP} XP):</span>
+                    <span className={user.ecoXP >= camp.requiredXP ? 'text-emerald-700 font-extrabold' : 'text-rose-600 font-bold'}>
                       {user.ecoXP} / {camp.requiredXP}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Streak ({camp.requiredStreak} Days):</span>
-                    <span className={user.streakDays >= camp.requiredStreak ? 'text-[#10b981] font-bold' : 'text-rose-600 font-bold'}>
+                    <span className="text-gray-600 font-medium">Streak ({camp.requiredStreak} Days):</span>
+                    <span className={user.streakDays >= camp.requiredStreak ? 'text-emerald-700 font-extrabold' : 'text-rose-600 font-bold'}>
                       {user.streakDays} / {camp.requiredStreak}
                     </span>
                   </div>

@@ -7,7 +7,8 @@ interface LocationPageProps {
   onNext: (ward: PuneWard) => void;
 }
 
-export const LocationPage: React.FC<LocationPageProps> = ({ onNext }) => {
+export default function LocationPage(props: any) {
+  const onNext = props?.onNext || (() => {});
   const [ward, setWard] = useState<PuneWard>('Kothrud');
 
   const wards: PuneWard[] = [
@@ -26,25 +27,25 @@ export const LocationPage: React.FC<LocationPageProps> = ({ onNext }) => {
   return (
     <div className="space-y-6 text-left">
       <div>
-        <span className="font-mono text-xs font-bold text-[#6bfb9a]">STEP 2 OF 4 • LOCATION SETUP</span>
-        <h2 className="font-headline-lg text-2xl font-bold text-white mt-1">Select Your Pune Locality / Ward</h2>
-        <p className="text-xs text-[#bccabb]">Enables location-aware quests, Pune Metro routes, and Ward leaderboards.</p>
+        <span className="font-mono text-xs font-bold text-[#10b981]">STEP 2 OF 4 • LOCATION SETUP</span>
+        <h2 className="text-2xl font-extrabold text-gray-900 mt-1">Select Your Pune Locality / Ward</h2>
+        <p className="text-xs text-gray-600 font-medium">Enables location-aware quests, Pune Metro routes, and Ward leaderboards.</p>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
-        <label className="block text-xs font-mono text-[#bccabb] mb-2">City & Region</label>
+      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+        <label className="block text-xs font-mono font-bold text-gray-700 mb-2">City & Region</label>
         <input
           type="text"
           value="Pune, Maharashtra, India 📍"
           disabled
-          className="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-sm text-[#6bfb9a] font-mono font-bold"
+          className="w-full rounded-xl border border-gray-200 bg-white p-3 text-sm text-emerald-700 font-mono font-bold"
         />
 
-        <label className="block text-xs font-mono text-[#bccabb] mt-4 mb-2">Pune Ward / Neighborhood</label>
+        <label className="block text-xs font-mono font-bold text-gray-700 mt-4 mb-2">Pune Ward / Neighborhood</label>
         <select
           value={ward}
           onChange={(e) => setWard(e.target.value as PuneWard)}
-          className="w-full rounded-xl border border-white/10 bg-black/60 p-3 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+          className="w-full rounded-xl border border-gray-200 bg-white p-3 text-sm font-semibold text-gray-900 focus:border-[#10b981] focus:outline-none"
         >
           {wards.map((w) => (
             <option key={w} value={w}>
@@ -56,12 +57,10 @@ export const LocationPage: React.FC<LocationPageProps> = ({ onNext }) => {
 
       <button
         onClick={() => onNext(ward)}
-        className="w-full rounded-2xl bg-[#6bfb9a] py-3 text-sm font-bold text-[#003919] hover:bg-[#59e68a] transition-all"
+        className="w-full rounded-2xl bg-[#111827] py-3 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
       >
         Continue to Lifestyle Survey →
       </button>
     </div>
   );
-};
-
-export default LocationPage;
+}

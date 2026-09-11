@@ -17,18 +17,20 @@ interface QuestDetailPageProps {
   onUpdateState: (user: UserProfile, questStates: any, proofs: ProofSubmission[]) => void;
 }
 
-export const QuestDetailPage: React.FC<QuestDetailPageProps> = ({
-  questId,
-  allQuests,
-  user,
-  questStates,
-  proofSubmissions,
-  onNavigate,
-  onUpdateState,
-}) => {
+export default function QuestDetailPage(props: any) {
+  const questId = props?.questId || props?.params?.id || '';
+  const allQuests: Quest[] = props?.allQuests || [];
+  const user: UserProfile = props?.user || { id: 'u1', name: 'Citizen', username: 'citizen', level: 1, ecoXP: 0, persona: 'Carbon Challenger', streakDays: 1, completedQuestsCount: 0, totalCO2AvoidedKg: 0, puneWard: 'Kothrud', ageGroup: 'Gen Z / Young Adult' };
+  const questStates = props?.questStates || {};
+  const proofSubmissions: ProofSubmission[] = props?.proofSubmissions || [];
+  const onNavigate = props?.onNavigate || (() => {});
+  const onUpdateState = props?.onUpdateState || (() => {});
+
   const quest = allQuests.find((q) => q.id === questId) || allQuests[0];
-  const questState = questStates[quest.id]?.status || 'available';
+  const questState = questStates[quest ? quest.id : '']?.status || 'available';
   const [showModal, setShowModal] = useState(false);
+
+  if (!quest) return null;
 
   const handleAccept = () => {
     const updated = {
@@ -60,59 +62,59 @@ export const QuestDetailPage: React.FC<QuestDetailPageProps> = ({
 
   return (
     <div className="space-y-6 pb-20 md:pb-8 text-left max-w-3xl mx-auto">
-      <button onClick={() => onNavigate('/quests')} className="font-mono text-xs text-[#6bfb9a] hover:underline">
+      <button onClick={() => onNavigate('/quests')} className="font-mono text-xs font-bold text-[#10b981] hover:underline">
         ← Back to Quests Catalog
       </button>
 
       <GlassCard glow className="p-8 space-y-6">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <span className="font-mono text-xs font-bold text-[#ffd23f]">+{quest.xpReward} EcoXP</span>
-          <span className="font-mono text-xs text-[#6bfb9a] uppercase border border-[#6bfb9a]/30 px-3 py-1 rounded-full">
+        <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+          <span className="font-mono text-xs font-bold text-amber-700">+{quest.xpReward} EcoXP</span>
+          <span className="font-mono text-xs text-emerald-800 font-bold uppercase border border-emerald-300 bg-emerald-50 px-3 py-1 rounded-full">
             {quest.verificationType.replace('_', ' ')}
           </span>
         </div>
 
         <div>
-          <h1 className="font-display-lg text-2xl md:text-3xl font-extrabold text-white">{quest.title}</h1>
-          <p className="mt-2 text-sm text-[#bccabb] leading-relaxed">{quest.description}</p>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900">{quest.title}</h1>
+          <p className="mt-2 text-sm text-gray-600 leading-relaxed font-medium">{quest.description}</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 font-mono text-xs text-[#bccabb]">
-          <div className="rounded-xl bg-white/5 p-3 text-center">
-            <div className="text-[#6bfb9a] font-bold">-{quest.co2ImpactKg} kg</div>
-            <div className="text-[10px] uppercase">CO₂ Impact</div>
+        <div className="grid grid-cols-3 gap-3 font-mono text-xs text-gray-700">
+          <div className="rounded-xl bg-gray-50 border border-gray-200 p-3 text-center">
+            <div className="text-emerald-700 font-black">-{quest.co2ImpactKg} kg</div>
+            <div className="text-[10px] uppercase font-bold text-gray-500">CO₂ Impact</div>
           </div>
-          <div className="rounded-xl bg-white/5 p-3 text-center">
-            <div className="text-[#ffd23f] font-bold">{quest.duration}</div>
-            <div className="text-[10px] uppercase">Duration</div>
+          <div className="rounded-xl bg-gray-50 border border-gray-200 p-3 text-center">
+            <div className="text-amber-700 font-black">{quest.duration}</div>
+            <div className="text-[10px] uppercase font-bold text-gray-500">Duration</div>
           </div>
-          <div className="rounded-xl bg-white/5 p-3 text-center">
-            <div className="text-white font-bold">{quest.difficulty}</div>
-            <div className="text-[10px] uppercase">Difficulty</div>
+          <div className="rounded-xl bg-gray-50 border border-gray-200 p-3 text-center">
+            <div className="text-gray-900 font-black">{quest.difficulty}</div>
+            <div className="text-[10px] uppercase font-bold text-gray-500">Difficulty</div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-black/40 p-4">
-          <h4 className="font-mono text-xs font-bold text-[#6bfb9a] uppercase">Verification Requirement Summary</h4>
-          <p className="mt-1 text-xs text-[#e4e2de]">{quest.requirementsSummary}</p>
+        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+          <h4 className="font-mono text-xs font-bold text-emerald-800 uppercase">Verification Requirement Summary</h4>
+          <p className="mt-1 text-xs text-gray-700 font-medium">{quest.requirementsSummary}</p>
         </div>
 
         <div className="pt-2">
           {questState === 'completed' ? (
-            <div className="rounded-2xl bg-emerald-500/20 p-4 text-center text-sm font-bold text-emerald-400">
+            <div className="rounded-2xl bg-emerald-50 border border-emerald-300 p-4 text-center text-sm font-bold text-emerald-800">
               ✓ Quest Verified & Completed
             </div>
           ) : questState === 'active' ? (
             <button
               onClick={() => setShowModal(true)}
-              className="w-full rounded-2xl bg-[#6bfb9a] py-3.5 text-sm font-bold text-[#003919] hover:bg-[#59e68a]"
+              className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-bold text-white hover:bg-black transition-all shadow-sm"
             >
               Submit Action Proof & Verify
             </button>
           ) : (
             <button
               onClick={handleAccept}
-              className="w-full rounded-2xl bg-[#6bfb9a] py-3.5 text-sm font-bold text-[#003919] hover:bg-[#59e68a]"
+              className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-bold text-white hover:bg-black transition-all shadow-sm"
             >
               Accept Quest & Begin Real-World Action
             </button>
@@ -131,6 +133,4 @@ export const QuestDetailPage: React.FC<QuestDetailPageProps> = ({
       />
     </div>
   );
-};
-
-export default QuestDetailPage;
+}
