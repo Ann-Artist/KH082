@@ -429,6 +429,7 @@ EcoQuest includes configuration for free, 1-click deployment across multiple pla
 
 <br/>
 
+
 ---
 
 <div align="center">
@@ -436,3 +437,13 @@ EcoQuest includes configuration for free, 1-click deployment across multiple pla
 **EcoQuest — Play Green. Live Better.** 🌍
 
 </div>
+
+Contributers:
+
+**[Team 404]**
+<br>
+Anusha Randive <br>
+Atharv Yadav <br>
+Bhumika Andure <br>
+Pranav Sonar <br>
+
