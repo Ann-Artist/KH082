@@ -24,17 +24,6 @@
 <br/>
 
 
-
-<p align="center">
-  <sub>🎥 Video file located at: <a href="docs/assets/EcoQuest.mp4"><code>docs/assets/EcoQuest.mp4</code></a> (Citizen & Admin workflows)</sub>
-</p>
-
-</div>
-
-<br/>
-
----
-
 <br/>
 
 ## 📸 Complete Website Visual Tour
