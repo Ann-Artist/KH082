@@ -1,21 +1,30 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { CarbonResult, UserProfile } from '@/types';
 import { GlassCard } from '../../../components/ui/GlassCard';
 
 interface ResultPageProps {
-  result: CarbonResult;
-  user: UserProfile;
-  onFinishOnboarding: () => void;
+  result?: CarbonResult;
+  user?: UserProfile;
+  onFinishOnboarding?: () => void;
 }
 
 export default function ResultPage(props: any) {
+  const router = useRouter();
   const result: CarbonResult = props?.result || { totalMonthlyKgCO2e: 182, yearlyBaselineTonnes: 2.18, hotspotCategory: 'transportation', breakdown: [] };
   const user: UserProfile = props?.user || { id: 'u1', name: 'Citizen', username: 'citizen', level: 1, ecoXP: 0, persona: 'Carbon Challenger', streakDays: 1, completedQuestsCount: 0, totalCO2AvoidedKg: 0, puneWard: 'Kothrud', ageGroup: 'Gen Z / Young Adult' };
-  const onFinishOnboarding = props?.onFinishOnboarding || (() => {});
   const targetGoalKg = Math.round(result.totalMonthlyKgCO2e * 0.88);
   const reductionTargetKg = result.totalMonthlyKgCO2e - targetGoalKg;
+
+  const handleFinish = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof props?.onFinishOnboarding === 'function') {
+      props.onFinishOnboarding();
+    }
+    router.push('/dashboard');
+  };
 
   return (
     <div className="space-y-6 text-left">
@@ -78,8 +87,9 @@ export default function ResultPage(props: any) {
       </div>
 
       <button
-        onClick={onFinishOnboarding}
-        className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
+        type="button"
+        onClick={handleFinish}
+        className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm cursor-pointer"
       >
         Enter EcoQuest Canopy Dashboard →
       </button>

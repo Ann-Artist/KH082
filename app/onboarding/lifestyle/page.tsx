@@ -1,17 +1,30 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { LifestyleInputs } from '@/types';
+import { saveLifestyleInputs, saveUserProfile } from '../../../lib/storage';
 
 interface LifestylePageProps {
-  initialInputs: LifestyleInputs;
-  onNext: (inputs: LifestyleInputs) => void;
+  initialInputs?: LifestyleInputs;
+  onNext?: (inputs: LifestyleInputs) => void;
 }
 
 export default function LifestylePage(props: any) {
+  const router = useRouter();
   const initialInputs: LifestyleInputs = props?.initialInputs || { carKmPerWeek: 40, bikeKmPerWeek: 20, monthlyKwh: 140, dietType: 'vegetarian', shoppingItemsPerMonth: 4, recyclingSegregated: true };
-  const onNext = props?.onNext || (() => {});
   const [inputs, setInputs] = useState<LifestyleInputs>(initialInputs);
+
+  const handleContinue = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof props?.onNext === 'function') {
+      props.onNext(inputs);
+    } else {
+      const { result, profile } = saveLifestyleInputs(inputs);
+      saveUserProfile(profile);
+      router.push('/onboarding/result');
+    }
+  };
 
   return (
     <div className="space-y-6 text-left">
@@ -99,8 +112,9 @@ export default function LifestylePage(props: any) {
       </div>
 
       <button
-        onClick={() => onNext(inputs)}
-        className="w-full rounded-2xl bg-[#111827] py-3 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
+        type="button"
+        onClick={handleContinue}
+        className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm cursor-pointer"
       >
         Run Carbon Engine Calculation →
       </button>

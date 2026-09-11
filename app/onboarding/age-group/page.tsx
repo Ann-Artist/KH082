@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AgeGroup } from '@/types';
 
 interface AgeGroupPageProps {
-  onNext: (ageGroup: AgeGroup) => void;
+  onNext?: (ageGroup: AgeGroup) => void;
 }
 
 export default function AgeGroupPage(props: any) {
-  const onNext = props?.onNext || (() => {});
+  const router = useRouter();
   const [selected, setSelected] = useState<AgeGroup>('Gen Z / Young Adult');
 
   const options: { id: AgeGroup; title: string; desc: string; icon: string }[] = [
@@ -17,6 +18,15 @@ export default function AgeGroupPage(props: any) {
     { id: 'Adult', title: '🌿 Adults', desc: 'Practical lifestyle, transportation & household energy reduction.', icon: 'home' },
     { id: 'Senior', title: '🌳 Seniors', desc: 'Waste segregation, tree care, energy conservation & community drives.', icon: 'park' },
   ];
+
+  const handleContinue = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof props?.onNext === 'function') {
+      props.onNext(selected);
+    } else {
+      router.push('/onboarding/location');
+    }
+  };
 
   return (
     <div className="space-y-6 text-left">
@@ -47,8 +57,9 @@ export default function AgeGroupPage(props: any) {
       </div>
 
       <button
-        onClick={() => onNext(selected)}
-        className="w-full rounded-2xl bg-[#111827] py-3 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
+        type="button"
+        onClick={handleContinue}
+        className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm cursor-pointer"
       >
         Continue to Location Setup →
       </button>

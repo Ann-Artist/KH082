@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { PuneWard } from '@/types';
 
 interface LocationPageProps {
-  onNext: (ward: PuneWard) => void;
+  onNext?: (ward: PuneWard) => void;
 }
 
 export default function LocationPage(props: any) {
-  const onNext = props?.onNext || (() => {});
+  const router = useRouter();
   const [ward, setWard] = useState<PuneWard>('Kothrud');
 
   const wards: PuneWard[] = [
@@ -23,6 +24,15 @@ export default function LocationPage(props: any) {
     'Shivajinagar',
     'Aundh',
   ];
+
+  const handleContinue = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof props?.onNext === 'function') {
+      props.onNext(ward);
+    } else {
+      router.push('/onboarding/lifestyle');
+    }
+  };
 
   return (
     <div className="space-y-6 text-left">
@@ -56,8 +66,9 @@ export default function LocationPage(props: any) {
       </div>
 
       <button
-        onClick={() => onNext(ward)}
-        className="w-full rounded-2xl bg-[#111827] py-3 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm"
+        type="button"
+        onClick={handleContinue}
+        className="w-full rounded-2xl bg-[#111827] py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-sm cursor-pointer"
       >
         Continue to Lifestyle Survey →
       </button>
