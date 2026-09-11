@@ -7,12 +7,8 @@ import badgesData from '../../data/badges.json';
 
 import { getStoredUserProfile } from '../../lib/storage';
 
-interface BadgesPageProps {
-  user?: UserProfile;
-}
-
-const BadgesPage: React.FC<BadgesPageProps> = ({ user: propUser }) => {
-  const user = propUser || getStoredUserProfile();
+export default function BadgesPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
   const badgesList = badgesData as Badge[];
 
   return (
@@ -65,6 +61,4 @@ const BadgesPage: React.FC<BadgesPageProps> = ({ user: propUser }) => {
       </div>
     </div>
   );
-};
-
-export default BadgesPage;
+}

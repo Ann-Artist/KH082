@@ -7,12 +7,8 @@ import { GlassCard } from '../../components/ui/GlassCard';
 
 import { getStoredUserProfile } from '../../lib/storage';
 
-interface ProgressPageProps {
-  user?: UserProfile;
-}
-
-const ProgressPage: React.FC<ProgressPageProps> = ({ user: propUser }) => {
-  const user = propUser || getStoredUserProfile();
+export default function ProgressPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
   return (
     <div className="space-y-8 pb-20 md:pb-8">
       <div>
@@ -37,6 +33,4 @@ const ProgressPage: React.FC<ProgressPageProps> = ({ user: propUser }) => {
       </GlassCard>
     </div>
   );
-};
-
-export default ProgressPage;
+}

@@ -5,12 +5,8 @@ import { UserProfile, RewardCampaign } from '@/types';
 import { getStoredUserProfile } from '../../lib/storage';
 import { GlassCard } from '../../components/ui/GlassCard';
 
-interface RewardsPageProps {
-  user?: UserProfile;
-}
-
-const RewardsPage: React.FC<RewardsPageProps> = ({ user: propUser }) => {
-  const user = propUser || getStoredUserProfile();
+export default function RewardsPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
   const [claimedCampaigns, setClaimedCampaigns] = useState<Record<string, boolean>>({});
 
   const campaigns: RewardCampaign[] = [
@@ -129,6 +125,4 @@ const RewardsPage: React.FC<RewardsPageProps> = ({ user: propUser }) => {
       </div>
     </div>
   );
-};
-
-export default RewardsPage;
+}

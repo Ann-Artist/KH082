@@ -6,14 +6,9 @@ import { GlassCard } from '../../components/ui/GlassCard';
 import { generateWeeklyReport } from '../../lib/ai/advisor';
 import { getStoredUserProfile, getStoredCarbonResult } from '../../lib/storage';
 
-interface ImpactPageProps {
-  user?: UserProfile;
-  carbonResult?: CarbonResult;
-}
-
-const ImpactPage: React.FC<ImpactPageProps> = ({ user: propUser, carbonResult: propResult }) => {
-  const user = propUser || getStoredUserProfile();
-  const carbonResult = propResult || getStoredCarbonResult();
+export default function ImpactPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
+  const carbonResult = props?.carbonResult || getStoredCarbonResult();
   const weeklyReport = generateWeeklyReport(user, carbonResult, user.completedQuestsCount);
 
   const beforeFootprint = 182; // Baseline footprint kg/month
@@ -82,7 +77,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ user: propUser, carbonResult: p
       <div>
         <h2 className="mb-4 font-headline-lg text-xl font-bold text-white">Category Emission Share & Hotspots</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {carbonResult.breakdown.map((cat) => (
+          {carbonResult.breakdown.map((cat: any) => (
             <GlassCard key={cat.category} className="p-5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -118,6 +113,4 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ user: propUser, carbonResult: p
       </div>
     </div>
   );
-};
-
-export default ImpactPage;
+}

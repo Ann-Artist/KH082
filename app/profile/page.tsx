@@ -6,14 +6,11 @@ import { UserProfile, LifestyleInputs, PuneWard } from '@/types';
 import { getStoredLifestyleInputs, saveLifestyleInputs, getStoredUserProfile, saveUserProfile } from '../../lib/storage';
 import { GlassCard } from '../../components/ui/GlassCard';
 
-interface ProfilePageProps {
-  user?: UserProfile;
-  onUpdateState?: (user: UserProfile) => void;
-  onNavigate?: (path: string) => void;
-}
-
-const ProfilePage: React.FC<ProfilePageProps> = ({ user: propUser, onUpdateState, onNavigate }) => {
+export default function ProfilePage(props: any) {
   const router = useRouter();
+  const propUser = props?.user;
+  const onUpdateState = props?.onUpdateState;
+  const onNavigate = props?.onNavigate;
   const [userState, setUserState] = useState<UserProfile>(() => propUser || getStoredUserProfile());
   const user = propUser || userState;
 
@@ -178,6 +175,4 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user: propUser, onUpdateState
       </form>
     </div>
   );
-};
-
-export default ProfilePage;
+}

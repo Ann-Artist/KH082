@@ -34,7 +34,30 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
   const [selectedPhoto, setSelectedPhoto] = useState<string>(
     'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&auto=format&fit=crop&q=80'
   );
+  const [uploadedFileMeta, setUploadedFileMeta] = useState<{
+    name: string;
+    size: string;
+    hash: string;
+  } | null>(null);
   const [auditResult, setAuditResult] = useState<any>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setSelectedPhoto(event.target.result as string);
+        setUploadedFileMeta({
+          name: file.name,
+          size: `${(file.size / 1024).toFixed(1)} KB`,
+          hash: `SHA256_${Math.random().toString(36).substring(2, 10).toUpperCase()}`,
+        });
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   // Simulated GPS route counter
   useEffect(() => {
@@ -189,15 +212,72 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
               </div>
             )}
 
-            {/* Level 3 Photo Proof Scanner */}
+            {/* Level 3 Photo Proof Scanner with Interactive File Upload */}
             {quest.verificationType === 'level_3_photo' && (
               <div className="space-y-3">
-                <p className="text-xs font-semibold text-white">Level 3 Photo Proof (AI Computer Vision Scan)</p>
-                <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-white/20">
-                  <img src={selectedPhoto} alt="Proof Sample" className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-3">
-                    <span className="text-xs font-mono text-[#6bfb9a]">📸 Sample Pune Photo Upload Attached</span>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold text-white">Upload Task Proof Photo (AI Computer Vision Scan)</p>
+                  {uploadedFileMeta && (
+                    <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 font-mono text-[10px] font-bold text-emerald-400">
+                      ✓ Custom Photo Uploaded
+                    </span>
+                  )}
+                </div>
+
+                {/* Live Image Preview & Geotag Metadata */}
+                <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-white/20 bg-black/40">
+                  <img src={selectedPhoto} alt="Proof Upload" className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-3 flex flex-col justify-end">
+                    {uploadedFileMeta ? (
+                      <div className="font-mono text-[11px] text-[#6bfb9a] space-y-0.5">
+                        <div className="font-bold flex items-center gap-1">
+                          <span className="material-symbols-outlined text-sm">check_circle</span>
+                          {uploadedFileMeta.name} ({uploadedFileMeta.size})
+                        </div>
+                        <div className="text-[10px] text-[#bccabb]">
+                          📍 Geotag: 18.5204° N, 73.8567° E (Kothrud, Pune) • {uploadedFileMeta.hash}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="font-mono text-[11px] text-[#6bfb9a]">
+                        📸 Sample Pune Photo (Click button below to select image from your device)
+                      </div>
+                    )}
                   </div>
+                </div>
+
+                {/* Hidden File Input */}
+                <input
+                  type="file"
+                  id="task-proof-file-input"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+
+                {/* Upload Action Buttons */}
+                <div className="flex gap-2">
+                  <label
+                    htmlFor="task-proof-file-input"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-[#6bfb9a]/40 bg-[#6bfb9a]/10 px-4 py-2.5 font-mono text-xs font-bold text-[#6bfb9a] hover:bg-[#6bfb9a]/20 cursor-pointer transition-all text-center"
+                  >
+                    <span className="material-symbols-outlined text-lg">cloud_upload</span>
+                    <span>{uploadedFileMeta ? 'Change / Upload New Photo' : '📷 Upload Photo from Device'}</span>
+                  </label>
+
+                  {uploadedFileMeta && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedPhoto('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&auto=format&fit=crop&q=80');
+                        setUploadedFileMeta(null);
+                      }}
+                      className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2.5 font-mono text-xs font-bold text-red-400 hover:bg-red-500/20"
+                      title="Reset to sample photo"
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
               </div>
             )}

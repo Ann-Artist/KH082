@@ -7,22 +7,11 @@ import { saveCustomQuest, saveProofSubmissions } from '../../lib/storage';
 
 import { getStoredUserProfile, getAllQuests, getStoredProofSubmissions } from '../../lib/storage';
 
-interface AdminPageProps {
-  user?: UserProfile;
-  allQuests?: Quest[];
-  proofSubmissions?: ProofSubmission[];
-  onUpdateState?: (user: UserProfile, questStates: any, proofs: ProofSubmission[]) => void;
-}
-
-const AdminPage: React.FC<AdminPageProps> = ({
-  user: propUser,
-  allQuests: propQuests,
-  proofSubmissions: propProofs,
-  onUpdateState,
-}) => {
-  const user = propUser || getStoredUserProfile();
-  const allQuests = propQuests || getAllQuests();
-  const proofSubmissions = propProofs || getStoredProofSubmissions(user.id);
+export default function AdminPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
+  const allQuests = props?.allQuests || getAllQuests();
+  const proofSubmissions = props?.proofSubmissions || getStoredProofSubmissions(user.id);
+  const onUpdateState = props?.onUpdateState;
   const [activeTab, setActiveTab] = useState<'review' | 'quests'>('review');
 
   // Create Quest state
@@ -58,7 +47,7 @@ const AdminPage: React.FC<AdminPageProps> = ({
   };
 
   const handleAuditReview = (submissionId: string, approve: boolean) => {
-    const updated = proofSubmissions.map((p) => {
+    const updated = proofSubmissions.map((p: ProofSubmission) => {
       if (p.id === submissionId) {
         return {
           ...p,
@@ -123,7 +112,7 @@ const AdminPage: React.FC<AdminPageProps> = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {proofSubmissions.map((proof) => (
+                {proofSubmissions.map((proof: ProofSubmission) => (
                   <tr key={proof.id} className="hover:bg-white/5">
                     <td className="py-3 px-4 font-semibold text-white">{proof.userName}</td>
                     <td className="py-3 px-4 font-mono">{proof.questTitle}</td>
@@ -256,6 +245,4 @@ const AdminPage: React.FC<AdminPageProps> = ({
       )}
     </div>
   );
-};
-
-export default AdminPage;
+}

@@ -7,12 +7,8 @@ import { getStoredUserProfile } from '../../lib/storage';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { ShareCardCanvas } from '../../components/leaderboard/ShareCardCanvas';
 
-interface LeaderboardPageProps {
-  user?: UserProfile;
-}
-
-const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ user: propUser }) => {
-  const user = propUser || getStoredUserProfile();
+export default function LeaderboardPage(props: any) {
+  const user = props?.user || getStoredUserProfile();
   const [scope, setScope] = useState<'city' | 'ward' | 'friends'>('city');
 
   const { entries, currentUserRank } = getPuneLeaderboard(user, scope);
@@ -155,6 +151,4 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ user: propUser }) => 
       </div>
     </div>
   );
-};
-
-export default LeaderboardPage;
+}
