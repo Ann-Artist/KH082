@@ -12,10 +12,10 @@ export default function BadgesPage(props: any) {
   const badgesList = badgesData as Badge[];
 
   return (
-    <div className="space-y-8 pb-20 md:pb-8">
+    <div className="space-y-8 pb-20 md:pb-8 font-sans">
       <div>
-        <h1 className="font-headline-lg text-2xl md:text-3xl font-bold text-white">Achievement Badges</h1>
-        <p className="text-xs text-[#bccabb]">Unlocked milestones & in-progress achievement medallions.</p>
+        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Achievement Badges</h1>
+        <p className="text-xs text-gray-600">Unlocked milestones & in-progress achievement medallions.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,23 +35,23 @@ export default function BadgesPage(props: any) {
           }
 
           return (
-            <GlassCard key={badge.id} glow={isUnlocked} className="p-6 text-center">
+            <GlassCard key={badge.id} glow={isUnlocked} className="p-6 text-center border border-gray-200">
               <div
                 className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 transition-all ${
                   isUnlocked
-                    ? 'border-[#ffd23f] bg-[#ffd23f]/20 text-[#ffd23f] shadow-[0_0_20px_rgba(255,210,63,0.4)]'
-                    : 'border-white/10 bg-white/5 text-white/30'
+                    ? 'border-amber-400 bg-amber-50 text-amber-600 shadow-sm'
+                    : 'border-gray-200 bg-gray-100 text-gray-400'
                 }`}
               >
                 <span className="material-symbols-outlined text-3xl">{badge.icon}</span>
               </div>
 
-              <h3 className="mt-4 font-headline-lg text-lg font-bold text-white">{badge.title}</h3>
-              <p className="mt-1 text-xs text-[#bccabb] leading-relaxed">{badge.description}</p>
+              <h3 className="mt-4 text-lg font-bold text-gray-900">{badge.title}</h3>
+              <p className="mt-1 text-xs text-gray-600 leading-relaxed font-medium">{badge.description}</p>
 
-              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between font-mono text-xs">
-                <span className="text-[#bccabb]">Status:</span>
-                <span className={isUnlocked ? 'text-[#6bfb9a] font-bold' : 'text-[#ffd23f]'}>
+              <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between font-mono text-xs">
+                <span className="text-gray-500">Status:</span>
+                <span className={isUnlocked ? 'text-[#10b981] font-bold' : 'text-amber-600 font-bold'}>
                   {isUnlocked ? '✓ UNLOCKED' : `In Progress (${progressText})`}
                 </span>
               </div>

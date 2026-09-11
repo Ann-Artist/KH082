@@ -53,11 +53,11 @@ export default function RewardsPage(props: any) {
   };
 
   return (
-    <div className="space-y-8 pb-20 md:pb-8">
+    <div className="space-y-8 pb-20 md:pb-8 font-sans">
       {/* Header */}
       <div>
-        <h1 className="font-headline-lg text-2xl md:text-3xl font-bold text-white">Reward Campaign Simulation</h1>
-        <p className="text-xs text-[#bccabb]">Simulated Pune municipal & green partner incentive campaigns.</p>
+        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Reward Campaign Simulation</h1>
+        <p className="text-xs text-gray-600">Simulated Pune municipal & green partner incentive campaigns.</p>
       </div>
 
       {/* Campaign Cards List */}
@@ -66,54 +66,54 @@ export default function RewardsPage(props: any) {
           const isClaimed = claimedCampaigns[camp.id];
 
           return (
-            <GlassCard key={camp.id} glow={camp.isEligible} className="flex flex-col justify-between p-6">
+            <GlassCard key={camp.id} glow={camp.isEligible} className="flex flex-col justify-between p-6 border border-gray-200">
               <div>
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="rounded-full border border-[#ffd23f]/30 bg-[#ffd23f]/10 px-2.5 py-0.5 font-mono text-xs font-bold text-[#ffd23f]">
+                  <span className="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-0.5 font-mono text-xs font-bold text-amber-700">
                     {camp.rewardValue}
                   </span>
-                  <span className="text-[11px] font-mono text-[#bccabb]">Valid: {camp.validUntil}</span>
+                  <span className="text-[11px] font-mono text-gray-500 font-semibold">Valid: {camp.validUntil}</span>
                 </div>
 
-                <h3 className="font-title-md text-base font-bold text-white">{camp.title}</h3>
-                <p className="mt-1 font-mono text-xs text-[#6bfb9a]">Sponsor: {camp.sponsor}</p>
-                <p className="mt-3 text-xs text-[#bccabb] leading-relaxed">{camp.description}</p>
+                <h3 className="text-base font-bold text-gray-900">{camp.title}</h3>
+                <p className="mt-1 font-mono text-xs font-bold text-[#10b981]">Sponsor: {camp.sponsor}</p>
+                <p className="mt-3 text-xs text-gray-600 leading-relaxed font-medium">{camp.description}</p>
 
                 {/* Requirements Progress */}
-                <div className="mt-5 space-y-2 rounded-2xl border border-white/5 bg-black/30 p-3 font-mono text-xs">
+                <div className="mt-5 space-y-2 rounded-2xl border border-gray-200 bg-gray-50 p-3 font-mono text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#bccabb]">EcoXP ({camp.requiredXP} XP):</span>
-                    <span className={user.ecoXP >= camp.requiredXP ? 'text-[#6bfb9a] font-bold' : 'text-red-400'}>
+                    <span className="text-gray-600">EcoXP ({camp.requiredXP} XP):</span>
+                    <span className={user.ecoXP >= camp.requiredXP ? 'text-[#10b981] font-bold' : 'text-rose-600 font-bold'}>
                       {user.ecoXP} / {camp.requiredXP}
                     </span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-[#bccabb]">Streak ({camp.requiredStreak} Days):</span>
-                    <span className={user.streakDays >= camp.requiredStreak ? 'text-[#6bfb9a] font-bold' : 'text-red-400'}>
+                    <span className="text-gray-600">Streak ({camp.requiredStreak} Days):</span>
+                    <span className={user.streakDays >= camp.requiredStreak ? 'text-[#10b981] font-bold' : 'text-rose-600 font-bold'}>
                       {user.streakDays} / {camp.requiredStreak}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/5">
+              <div className="mt-6 pt-3 border-t border-gray-100">
                 {isClaimed ? (
-                  <div className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/15 py-3 text-xs font-bold text-emerald-400">
-                    <span className="material-symbols-outlined text-base">check_circle</span>
+                  <div className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-300 bg-emerald-50 py-3 text-xs font-bold text-emerald-700">
+                    <span className="material-symbols-outlined text-base text-emerald-600">check_circle</span>
                     <span>Reward Voucher Claimed!</span>
                   </div>
                 ) : camp.isEligible ? (
                   <button
                     onClick={() => handleClaim(camp.id)}
-                    className="w-full rounded-xl bg-[#6bfb9a] py-3 text-xs font-bold text-[#003919] hover:bg-[#59e68a] transition-all"
+                    className="w-full rounded-xl bg-[#111827] py-3 text-xs font-bold text-white hover:bg-black transition-all shadow-sm"
                   >
                     🎁 Claim Reward Voucher
                   </button>
                 ) : (
                   <button
                     disabled
-                    className="w-full rounded-xl border border-white/10 bg-white/5 py-3 text-xs font-bold text-[#bccabb] cursor-not-allowed opacity-60"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-100 py-3 text-xs font-bold text-gray-400 cursor-not-allowed"
                   >
                     🔒 Requirements Pending
                   </button>

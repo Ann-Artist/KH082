@@ -26,28 +26,28 @@ export const ProgressionTree: React.FC<ProgressionTreeProps> = ({ user }) => {
             >
               {/* Card */}
               <div
-                className={`w-[42%] rounded-2xl border p-5 backdrop-blur-xl transition-all ${
+                className={`w-[42%] rounded-2xl border p-5 transition-all ${
                   isCurrent
-                    ? 'border-[#ffd23f] bg-gradient-to-r from-[#ffd23f]/15 to-[#121b16] shadow-[0_0_30px_rgba(255,210,63,0.25)]'
+                    ? 'border-amber-400 bg-amber-50/90 text-gray-900 shadow-md'
                     : isUnlocked
-                    ? 'border-[#6bfb9a]/40 bg-[#121b16]/90 shadow-[0_0_20px_rgba(107,251,154,0.1)]'
-                    : 'border-white/10 bg-black/40 opacity-60'
+                    ? 'border-emerald-200 bg-emerald-50/80 text-gray-900 shadow-sm'
+                    : 'border-gray-200 bg-gray-50 opacity-60 text-gray-700'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold uppercase text-[#6bfb9a]">
+                  <span className="font-mono text-xs font-extrabold uppercase text-[#10b981]">
                     Level {tier.level}
                   </span>
-                  <span className="font-mono text-xs text-[#ffd23f]">
+                  <span className="font-mono text-xs font-bold text-amber-600">
                     {tier.minXP} XP Required
                   </span>
                 </div>
 
-                <h3 className="mt-2 font-display-lg text-lg font-bold text-white">
+                <h3 className="mt-2 text-lg font-bold text-gray-900">
                   {tier.title} {isCurrent && ' (YOU ARE HERE)'}
                 </h3>
 
-                <p className="mt-1 text-xs text-[#bccabb]">
+                <p className="mt-1 text-xs text-gray-600 font-medium">
                   {isUnlocked
                     ? 'Status: Tier Unlocked & Verified'
                     : 'Status: Locked (Accumulate EcoXP to unlock)'}
@@ -58,10 +58,10 @@ export const ProgressionTree: React.FC<ProgressionTreeProps> = ({ user }) => {
               <div
                 className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-4 font-mono font-black text-lg transition-all ${
                   isCurrent
-                    ? 'border-[#ffd23f] bg-[#ffd23f] text-[#003919] shadow-[0_0_25px_rgba(255,210,63,0.8)] scale-110'
+                    ? 'border-amber-400 bg-amber-400 text-gray-900 shadow-md scale-110'
                     : isUnlocked
-                    ? 'border-[#6bfb9a] bg-[#003919] text-[#6bfb9a]'
-                    : 'border-white/20 bg-black/80 text-white/40'
+                    ? 'border-[#10b981] bg-[#10b981] text-white'
+                    : 'border-gray-300 bg-gray-200 text-gray-500'
                 }`}
               >
                 {isUnlocked ? '✓' : tier.level}

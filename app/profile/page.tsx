@@ -44,51 +44,51 @@ export default function ProfilePage(props: any) {
   };
 
   return (
-    <div className="space-y-8 pb-20 md:pb-8">
+    <div className="space-y-8 pb-20 md:pb-8 font-sans">
       <div>
-        <h1 className="font-headline-lg text-2xl md:text-3xl font-bold text-white">Profile & Lifestyle Settings</h1>
-        <p className="text-xs text-[#bccabb]">Update your Pune profile, lifestyle parameters & recalculate footprint.</p>
+        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">Profile & Lifestyle Settings</h1>
+        <p className="text-xs text-gray-600">Update your Pune profile, lifestyle parameters & recalculate footprint.</p>
       </div>
 
       {savedSuccess && (
-        <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/15 p-4 text-xs font-bold text-emerald-300 flex items-center gap-2">
-          <span className="material-symbols-outlined">check_circle</span>
+        <div className="rounded-2xl border border-emerald-300 bg-emerald-50 p-4 text-xs font-bold text-emerald-800 flex items-center gap-2 shadow-sm">
+          <span className="material-symbols-outlined text-emerald-600">check_circle</span>
           <span>Profile & Lifestyle updated! Carbon footprint recalculated and AI recommendations refreshed.</span>
         </div>
       )}
 
       <form onSubmit={handleSaveProfile} className="space-y-6">
         {/* Basic Information */}
-        <GlassCard className="space-y-4">
-          <h2 className="font-headline-lg text-lg font-bold text-white">Basic Eco Profile</h2>
+        <GlassCard className="space-y-4 border border-gray-200">
+          <h2 className="text-lg font-bold text-gray-900">Basic Eco Profile</h2>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Full Name</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Full Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm text-gray-900 font-semibold focus:border-[#10b981] focus:bg-white focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Username (@)</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Username (@)</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm text-gray-900 font-semibold focus:border-[#10b981] focus:bg-white focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Pune Ward / Area</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Pune Ward / Area</label>
               <select
                 value={ward}
                 onChange={(e) => setWard(e.target.value as PuneWard)}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-900 font-bold focus:border-[#10b981] focus:bg-white focus:outline-none"
               >
                 <option value="Kothrud">Kothrud</option>
                 <option value="Viman Nagar">Viman Nagar</option>
@@ -104,58 +104,58 @@ export default function ProfilePage(props: any) {
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Age Group</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Age Group</label>
               <input
                 type="text"
                 value={user.ageGroup}
                 disabled
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-[#bccabb] cursor-not-allowed"
+                className="w-full rounded-xl border border-gray-200 bg-gray-100 px-3.5 py-2.5 text-sm text-gray-500 font-semibold cursor-not-allowed"
               />
             </div>
           </div>
         </GlassCard>
 
         {/* Lifestyle Inputs Recalculation */}
-        <GlassCard className="space-y-4">
-          <h2 className="font-headline-lg text-lg font-bold text-white">Lifestyle Change & Recalculation</h2>
+        <GlassCard className="space-y-4 border border-gray-200">
+          <h2 className="text-lg font-bold text-gray-900">Lifestyle Change & Recalculation</h2>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Car Km / Week</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Car Km / Week</label>
               <input
                 type="number"
                 value={inputs.carKmPerWeek}
                 onChange={(e) => setInputs({ ...inputs, carKmPerWeek: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm text-gray-900 font-semibold focus:border-[#10b981] focus:bg-white focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Bike Km / Week</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Bike Km / Week</label>
               <input
                 type="number"
                 value={inputs.bikeKmPerWeek}
                 onChange={(e) => setInputs({ ...inputs, bikeKmPerWeek: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm text-gray-900 font-semibold focus:border-[#10b981] focus:bg-white focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Monthly Electricity (kWh)</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Monthly Electricity (kWh)</label>
               <input
                 type="number"
                 value={inputs.monthlyKwh}
                 onChange={(e) => setInputs({ ...inputs, monthlyKwh: Number(e.target.value) })}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3.5 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm text-gray-900 font-semibold focus:border-[#10b981] focus:bg-white focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-[#bccabb] mb-1">Dietary Pattern</label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Dietary Pattern</label>
               <select
                 value={inputs.dietType}
                 onChange={(e) => setInputs({ ...inputs, dietType: e.target.value as any })}
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white focus:border-[#6bfb9a] focus:outline-none"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-gray-900 font-bold focus:border-[#10b981] focus:bg-white focus:outline-none"
               >
                 <option value="vegan">Vegan</option>
                 <option value="vegetarian">Vegetarian</option>
@@ -168,7 +168,7 @@ export default function ProfilePage(props: any) {
 
         <button
           type="submit"
-          className="rounded-2xl border border-[#6bfb9a]/40 bg-[#6bfb9a] px-8 py-3.5 text-sm font-extrabold text-[#003919] hover:bg-[#59e68a] transition-all shadow-lg"
+          className="rounded-2xl bg-[#111827] px-8 py-3.5 text-sm font-extrabold text-white hover:bg-black transition-all shadow-md"
         >
           Recalculate Carbon Footprint & Save Changes
         </button>
