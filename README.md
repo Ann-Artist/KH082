@@ -23,16 +23,7 @@
 
 <br/>
 
-## 🎬 Video Demonstration Walkthrough
 
-<div align="center">
-
-<video src="https://github.com/Ann-Artist/EcoQuest/raw/main/docs/assets/EcoQuest.mp4" controls="controls" width="100%" style="max-width: 880px; border-radius: 14px; box-shadow: 0 12px 36px rgba(0,0,0,0.6);">
-  <source src="docs/assets/EcoQuest.mp4" type="video/mp4">
-  Your browser does not support direct video playback. <a href="docs/assets/EcoQuest.mp4">Download and watch EcoQuest.mp4</a>
-</video>
-
-<br/>
 
 <p align="center">
   <sub>🎥 Video file located at: <a href="docs/assets/EcoQuest.mp4"><code>docs/assets/EcoQuest.mp4</code></a> (Citizen & Admin workflows)</sub>
