@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoQuest - Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@600&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#0b110e",
+                        "surface": "#131815",
+                        "card-bg": "#121b16",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#a8cfb9",
+                        "surface-dim": "#131412",
+                        "secondary-container": "#2a4e3d",
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-fixed-dim": "#4de082",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-background": "#e4e2de",
+                        "on-surface": "#e4e2de",
+                        "surface-container-highest": "#343533",
+                        "surface-bright": "#393937",
+                        "primary-container": "#4ade80",
+                        "surface-variant": "#343533",
+                        "on-secondary-fixed-variant": "#2a4e3d",
+                        "surface-container-lowest": "#0e0e0d",
+                        "on-primary-fixed-variant": "#005227",
+                        "on-error": "#690005",
+                        "on-primary-container": "#005e2d",
+                        "surface-tint": "#4de082",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary": "#003919",
+                        "primary": "#6bfb9a",
+                        "surface-container-high": "#2a2a28",
+                        "inverse-primary": "#006d36",
+                        "tertiary": "#ffdab2",
+                        "primary-fixed": "#6dfe9c",
+                        "surface-container": "#1f201e",
+                        "on-secondary": "#133727",
+                        "surface-container-low": "#1b1c1a",
+                        "tertiary-container": "#ffb657",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e4e2de",
+                        "on-secondary-container": "#97bea8",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#734700",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#bccabb",
+                        "on-tertiary-fixed": "#2a1700",
+                        "outline": "#869486",
+                        "secondary-fixed-dim": "#a8cfb9",
+                        "outline-variant": "#3d4a3e",
+                        "inverse-on-surface": "#30312e",
+                        "secondary-fixed": "#c4ecd4",
+                        "on-primary-fixed": "#00210c",
+                        "on-tertiary": "#472a00"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sm": "8px"
+                    },
+                    fontFamily: {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "stats-number": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b110e;
+            color: #e4e2de;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(134, 148, 134, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(134, 148, 134, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(18, 27, 22, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(107, 251, 154, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(107, 251, 154, 0.3);
+            box-shadow: 0 0 20px rgba(107, 251, 154, 0.05);
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(107, 251, 154, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 12px rgba(107, 251, 154, 0.4);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(107, 251, 154, 0.15) 0%, transparent 100%);
+            border-left: 3px solid #6bfb9a;
+            color: #6bfb9a;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+            animation: shimmer 3s infinite;
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex pb-20 md:pb-0 relative">
+<!-- Atmospheric Background -->
+<div class="fixed inset-0 z-0 pointer-events-none opacity-20 mix-blend-screen">
+<div class="bg-cover bg-center w-full h-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD3Xp1Qh2yO1gBnaAbiHka6wuULO-lvdsqDuKGlhlMgrMv3wtz5rUSeKVzUhy4s5hapxIrtu4Ka8zGbkzR3HM5aVkdJjokSCkSNC0kFrgC6WqfO0D4OIoeJl22aYdIW4lTM8tGNFno2HoGkc80ODlRI7qkSYLA-NqUk7-ZG0aKzfTwn2GKhPZZ3LqByFkPFmZXZdAHW8Z8y5lW6DMh07mR1SbDfnTEk3G4iYp4k1WI51mPKMJxTCU_aNA')"></div>
+</div>
+<div class="fixed inset-0 z-0 pointer-events-none bg-gradient-to-t from-[#0b110e] via-[#0b110e]/90 to-transparent"></div>
+<!-- SideNavBar (Desktop) -->
+<aside class="fixed left-0 top-0 h-full w-64 hidden md:flex flex-col bg-[#0f1613]/90 backdrop-blur-xl border-r border-white/5 p-lg z-40">
+<div class="mb-xl flex items-center gap-sm px-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="font-display-lg text-white text-2xl tracking-tighter font-bold">Eco<span class="text-primary">Quest</span></span>
+</div>
+<div class="mb-8 px-2 flex flex-col gap-1">
+<h2 class="font-title-md text-white font-bold text-lg">Eco Guardian</h2>
+<p class="font-label-caps text-primary text-xs uppercase tracking-wider">Level 12 • 2,450 XP</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps font-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps">Journey</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps">Quests</span>
+</a>
+<a class="nav-item active flex items-center gap-md px-md py-3 rounded-r-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-caps font-bold">Leaderboard</span>
+</a>
+</nav>
+<div class="mt-auto glass-card rounded-2xl p-lg text-center relative overflow-hidden border-primary/20">
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="relative z-10 flex flex-col items-center">
+<h4 class="text-primary font-label-caps text-xs mb-4 uppercase tracking-wider">New Quest Available</h4>
+<button class="w-full bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 hover:text-primary-fixed font-label-caps py-2 rounded-lg transition-colors font-bold">
+                Join Now
+            </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col w-full md:pl-64 min-h-screen relative z-10">
+<!-- Top Header -->
+<header class="w-full flex justify-end items-center px-margin-mobile md:px-margin-desktop py-lg z-30">
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-error rounded-full border border-[#0b110e]"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+<img alt="Eco Guardian Profile" class="w-10 h-10 rounded-full border-2 border-primary/50 object-cover cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhdd1PWHn-ZfwuTMQDcsMBfR_5ij0qGqw2kwZqhFm99fQKSmTgTvH_CHfCYpNLqe9j5gOuUA9d0QzASSfsBqbcg8syoKrQ2i2Ra8QdEQwk5Z9QERMM8fZ3eBVb7IsglBa9iKm8hl6yUn8qYozDmUnQJpIVIWZtiWxupLYPCnSkEHvWfxrSgZ7ixS84d0mt6BT_8bxbgwn24F_TddJ3yP02bXuR5yGESe46I5SImLMBwrmHKH2bovfw9w"/>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile md:px-margin-desktop pb-xl">
+<div class="max-w-5xl mx-auto">
+<!-- Header & Regional Toggle -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-lg">
+<div>
+<h1 class="font-headline-lg text-2xl md:text-3xl text-white font-bold mb-2">Pune City Rankings</h1>
+<p class="text-on-surface-variant text-sm">Top Eco Warriors in your region</p>
+</div>
+<!-- Glassmorphism Segmented Control -->
+<div class="glass-card p-1 rounded-lg flex gap-1 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2 rounded-md bg-primary/20 text-primary font-label-caps text-xs tracking-wider shadow-sm border border-primary/30">City</button>
+<button class="flex-1 md:flex-none px-4 py-2 rounded-md text-on-surface-variant hover:text-white hover:bg-white/5 font-label-caps text-xs tracking-wider transition-colors">Neighborhood</button>
+<button class="flex-1 md:flex-none px-4 py-2 rounded-md text-on-surface-variant hover:text-white hover:bg-white/5 font-label-caps text-xs tracking-wider transition-colors">Friends</button>
+</div>
+</div>
+<!-- Top 3 Podium -->
+<div class="grid grid-cols-3 gap-4 md:gap-6 mb-16 items-end h-72 md:h-80">
+<!-- Rank 2 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-end h-[75%] relative group hover:-translate-y-2 transition-transform duration-300">
+<div class="absolute -top-12 md:-top-16">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-surface-variant relative overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYjBMlrRDC-dvRqv0DuiodvFXxUKFfwhTwgsmlmV6YspqrbcDIZULbWN8wCQR1A2CNod6n4w-hYFcnie_mrJ6hsjz4zH7b1SN2VR75XBYWdrbT9POUwkC5DIy5MevSJp5gUiOeCDH9HzLV8WVrnwtPta2YSAoQOcbA76cZClXABymxtFlFCx4zMbrefEBEswSc_YZZXZOXitzEh3Ya4aOJ6GM0pdQu3NbDsHUBNIqmXJak65FvwLCbIA"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface border border-outline-variant w-8 h-8 rounded-full flex items-center justify-center font-stats-number text-white font-bold text-sm z-10 shadow-lg">2</div>
+</div>
+<div class="text-center mt-10">
+<h3 class="font-title-md text-white text-sm md:text-base font-bold">Aria_Leaf</h3>
+<p class="font-label-caps text-primary text-[10px] md:text-xs mt-1 uppercase">Lvl 42</p>
+<p class="font-stats-number text-tertiary mt-2 text-lg md:text-xl font-bold">12.4k</p>
+</div>
+</div>
+<!-- Rank 1 (Center) -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-end h-full relative border-primary/40 group hover:-translate-y-2 transition-transform duration-300 z-10 shadow-[0_0_30px_rgba(107,251,154,0.1)]">
+<div class="absolute inset-0 bg-primary/5 rounded-2xl pointer-events-none"></div>
+<div class="absolute -top-16 md:-top-20">
+<div class="relative">
+<span class="material-symbols-outlined text-tertiary absolute -top-8 left-1/2 -translate-x-1/2 text-4xl drop-shadow-[0_0_10px_rgba(255,182,87,0.5)]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-primary p-1 bg-surface relative overflow-hidden shadow-[0_0_20px_rgba(107,251,154,0.3)]">
+<img class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP1m0da7jyoGrPtE1z1T__tiMYlMl_5zeVSyFlb8kOv_Ml5eNw93IhyI1yzkAkuW1OafDvJ6uqQgQyijsoJHUOo4aqF-TVel11jx8DdBx8_wh-0FosN-Yrs9hjw_KxigfnLqSuTSh8Pyy8W8I0fEOrktroI4cjU_2aWLCKHveBO5TrHsG85vzAuCPuXAsAfog-vsoMWe44ie1O3b1G3pp1PY1R6sn1aCcGi8ZJKY-WXpdbE1J0LQyJLg"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-[#0b110e] w-10 h-10 rounded-full flex items-center justify-center font-stats-number font-extrabold text-lg z-10 shadow-[0_0_15px_rgba(107,251,154,0.5)]">1</div>
+</div>
+<div class="text-center mt-12 md:mt-16 relative z-10">
+<h3 class="font-title-md text-primary text-base md:text-lg font-bold glow-text">NeoDruid</h3>
+<p class="font-label-caps text-primary text-xs mt-1 uppercase">Lvl 50</p>
+<p class="font-stats-number text-tertiary mt-2 text-xl md:text-2xl font-bold">15.8k</p>
+<div class="mt-2 text-[10px] text-on-surface-variant font-label-caps hidden md:block uppercase tracking-wider">Pune Champion</div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="glass-card rounded-2xl p-4 flex flex-col items-center justify-end h-[65%] relative group hover:-translate-y-2 transition-transform duration-300">
+<div class="absolute -top-10 md:-top-14">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-surface-variant relative overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_9p_b3vm_Ph2s1qYdEH0oN_iuw4r8ip5gDd7bNqztJ_qrepzyo64cHtdCUWSWblQysyiedGaLCc--ccEj12aV720AaNXfTJB09cGcWH5ahgDgBJVEBG64lDHhuCHO3L8-6HeeEMUZGc6ytkJ8IpRkWt9JQj5mcAbubwR90as5CjMoEUg78_sPaUUz-LFX---eJsJ3Xl3bjOevKUBrG524KDBWOfD7hiy0XyfKwGhYy6k0rmCpl8jYkA"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-surface border border-outline-variant w-8 h-8 rounded-full flex items-center justify-center font-stats-number text-white font-bold text-sm z-10 shadow-lg">3</div>
+</div>
+<div class="text-center mt-8">
+<h3 class="font-title-md text-white text-sm md:text-base font-bold">EcoSam</h3>
+<p class="font-label-caps text-primary text-[10px] md:text-xs mt-1 uppercase">Lvl 38</p>
+<p class="font-stats-number text-tertiary mt-2 text-lg md:text-xl font-bold">10.1k</p>
+</div>
+</div>
+</div>
+<!-- Ranking List -->
+<div class="flex flex-col gap-3">
+<!-- Normal Row -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-md hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-8 font-stats-number text-on-surface-variant font-bold text-center text-lg">4</div>
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN0gtaSTVRaaS5q93C8QEpBOFHakmz1y3acs_JsLfQjt_A3Hl3x6mix8nnrCar3UCge7RedDQ-2uogU_JJpHUU7I89bgPY8uu0iYOVWc7U0O943cnjIsac8olvshjB43j9Pd4v7TmBn4RimWaj9czMY8CdV_NrG4xho67u5VqcSei-IV8QsWguVka57ug6nOUei0p5Zk9EP_A4sCjMlFCl4HBwze5-ZPvnthH7chh6U4co-YX56h72NA"/>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-white text-sm md:text-base font-bold group-hover:text-primary transition-colors">VerdantWalker</h4>
+<p class="font-label-caps text-on-surface-variant text-xs mt-0.5 uppercase">Lvl 35</p>
+</div>
+<div class="font-stats-number text-white text-lg md:text-xl text-right font-bold">
+                        9,850<span class="text-[10px] font-label-caps text-primary ml-1 block md:inline uppercase">XP</span>
+</div>
+</div>
+<!-- Normal Row -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-md hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-8 font-stats-number text-on-surface-variant font-bold text-center text-lg">5</div>
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhYHq1BpNoUnw_J_eBMsDgDE_FJZLrGMezZW975udfH56540lhmVp7y4c_pfB3XSXsE6Bl4we-jreWSUrekjUZDikJWfDuHVCwf3MDtjscRzcynIOWBkBtGVgSmmIfD5zuBPU03jQie4hErnZHSHDMtAMJsHn56-8AtjRgqozdrCaehqZVV-7Iqb870CMRqObO_8y0O_thNj41-aI4zfXIZm5gWIvy9Ln03pEuk5i3_cNjBgSoDHtYlg"/>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-white text-sm md:text-base font-bold group-hover:text-primary transition-colors">UrbanForester</h4>
+<p class="font-label-caps text-on-surface-variant text-xs mt-0.5 uppercase">Lvl 33</p>
+</div>
+<div class="font-stats-number text-white text-lg md:text-xl text-right font-bold">
+                        8,420<span class="text-[10px] font-label-caps text-primary ml-1 block md:inline uppercase">XP</span>
+</div>
+</div>
+<!-- "You" Row Highlighted -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-md border-primary/50 relative overflow-hidden shadow-[0_0_15px_rgba(107,251,154,0.1)] cursor-pointer">
+<div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer pointer-events-none"></div>
+<div class="w-8 font-stats-number text-primary font-bold text-center text-lg relative z-10">6</div>
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary relative z-10">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhdd1PWHn-ZfwuTMQDcsMBfR_5ij0qGqw2kwZqhFm99fQKSmTgTvH_CHfCYpNLqe9j5gOuUA9d0QzASSfsBqbcg8syoKrQ2i2Ra8QdEQwk5Z9QERMM8fZ3eBVb7IsglBa9iKm8hl6yUn8qYozDmUnQJpIVIWZtiWxupLYPCnSkEHvWfxrSgZ7ixS84d0mt6BT_8bxbgwn24F_TddJ3yP02bXuR5yGESe46I5SImLMBwrmHKH2bovfw9w"/>
+</div>
+<div class="flex-1 relative z-10">
+<div class="flex items-center gap-2">
+<h4 class="font-title-md text-white text-sm md:text-base font-bold">Eco Guardian</h4>
+<span class="bg-primary text-[#0b110e] text-[10px] font-label-caps font-bold px-2 py-0.5 rounded-full uppercase">You</span>
+</div>
+<p class="font-label-caps text-primary text-xs mt-0.5 uppercase">Lvl 12</p>
+</div>
+<div class="font-stats-number text-primary text-lg md:text-xl text-right font-bold relative z-10 glow-text">
+                        2,450<span class="text-[10px] font-label-caps text-white ml-1 block md:inline uppercase">XP</span>
+</div>
+</div>
+<!-- Normal Row -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-md hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-8 font-stats-number text-on-surface-variant font-bold text-center text-lg">7</div>
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex-1">
+<h4 class="font-title-md text-white text-sm md:text-base font-bold group-hover:text-primary transition-colors">GreenThumb99</h4>
+<p class="font-label-caps text-on-surface-variant text-xs mt-0.5 uppercase">Lvl 10</p>
+</div>
+<div class="font-stats-number text-white text-lg md:text-xl text-right font-bold">
+                        1,900<span class="text-[10px] font-label-caps text-primary ml-1 block md:inline uppercase">XP</span>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-8 text-center pb-8">
+<button class="text-primary font-label-caps text-xs tracking-wider uppercase hover:text-white transition-colors py-2 px-6 rounded-full border border-transparent hover:border-white/20">
+                    Load More Ranks
+                </button>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#0f1613]/90 backdrop-blur-xl border-t border-white/10 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-caps mt-1 text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">map</span>
+<span class="font-label-caps mt-1 text-[10px]">Path</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">assignment</span>
+<span class="font-label-caps mt-1 text-[10px]">Tasks</span>
+</a>
+<!-- Active State -->
+<a class="flex flex-col items-center justify-center text-primary px-4 py-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-caps mt-1 text-[10px] font-bold">Rank</span>
+</a>
+</nav>
+</body></html>

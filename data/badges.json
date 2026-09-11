@@ -1,0 +1,42 @@
+[
+  {
+    "id": "badge_green_commuter",
+    "title": "Green Commuter",
+    "description": "Complete 5 public transit or cycling quests in Pune.",
+    "icon": "directions_transit",
+    "category": "transportation",
+    "requiredQuests": 5
+  },
+  {
+    "id": "badge_waste_warrior",
+    "title": "Waste Warrior",
+    "description": "Consistently segregate home waste and avoid single-use plastics.",
+    "icon": "recycling",
+    "category": "waste",
+    "requiredQuests": 3
+  },
+  {
+    "id": "badge_tree_guardian",
+    "title": "Tree Guardian",
+    "description": "Plant or adopt trees in Pune urban green zones.",
+    "icon": "park",
+    "category": "waste",
+    "requiredQuests": 2
+  },
+  {
+    "id": "badge_streak_master",
+    "title": "Streak Master",
+    "description": "Maintain an active EcoQuest streak for 7 consecutive days.",
+    "icon": "local_fire_department",
+    "category": "general",
+    "requiredStreak": 7
+  },
+  {
+    "id": "badge_eco_champion",
+    "title": "Eco Champion",
+    "description": "Reach 1,000 EcoXP and unlock Level 4 Eco Guardian status.",
+    "icon": "military_tech",
+    "category": "general",
+    "requiredXP": 1000
+  }
+]

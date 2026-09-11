@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoQuest - Journey</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@600&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#a8cfb9",
+                        "surface-dim": "#131412",
+                        "secondary-container": "#2a4e3d",
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-fixed-dim": "#4de082",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-background": "#e4e2de",
+                        "on-surface": "#e4e2de",
+                        "surface-container-highest": "#343533",
+                        "surface-bright": "#393937",
+                        "primary-container": "#4ade80",
+                        "surface-variant": "#343533",
+                        "on-secondary-fixed-variant": "#2a4e3d",
+                        "surface-container-lowest": "#0e0e0d",
+                        "on-primary-fixed-variant": "#005227",
+                        "on-error": "#690005",
+                        "on-primary-container": "#005e2d",
+                        "surface-tint": "#4de082",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary": "#003919",
+                        "primary": "#6bfb9a",
+                        "surface-container-high": "#2a2a28",
+                        "inverse-primary": "#006d36",
+                        "tertiary": "#ffdab2",
+                        "primary-fixed": "#6dfe9c",
+                        "surface-container": "#1f201e",
+                        "on-secondary": "#133727",
+                        "surface-container-low": "#1b1c1a",
+                        "tertiary-container": "#ffb657",
+                        "error": "#ffb4ab",
+                        "background": "#0b110e",
+                        "inverse-surface": "#e4e2de",
+                        "on-secondary-container": "#97bea8",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#734700",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#bccabb",
+                        "on-tertiary-fixed": "#2a1700",
+                        "outline": "#869486",
+                        "secondary-fixed-dim": "#a8cfb9",
+                        "outline-variant": "#3d4a3e",
+                        "surface": "#121b16", /* Matched with card-bg */
+                        "inverse-on-surface": "#30312e",
+                        "secondary-fixed": "#c4ecd4",
+                        "on-primary-fixed": "#00210c",
+                        "on-tertiary": "#472a00",
+                        "card-bg": "#121b16"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sm": "8px"
+                    },
+                    fontFamily: {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "stats-number": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b110e;
+            color: #e4e2de;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(18, 27, 22, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(107, 251, 154, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(107, 251, 154, 0.3);
+            box-shadow: 0 0 20px rgba(107, 251, 154, 0.05);
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(107, 251, 154, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
+        .bounce-hover:hover {
+            transform: scale(1.02) translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 12px rgba(107, 251, 154, 0.4);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(107, 251, 154, 0.15) 0%, transparent 100%);
+            border-left: 3px solid #6bfb9a;
+            color: #6bfb9a;
+        }
+
+        /* Journey Path Specific Styles */
+        .path-line {
+            stroke-dasharray: 12, 12;
+            animation: dash 30s linear infinite;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+        .node-glow {
+            box-shadow: 0 0 25px rgba(107, 251, 154, 0.6);
+            animation: pulse-node 2s infinite alternate;
+        }
+        @keyframes pulse-node {
+            from { box-shadow: 0 0 15px rgba(107, 251, 154, 0.4); }
+            to { box-shadow: 0 0 35px rgba(107, 251, 154, 0.8); }
+        }
+        .locked-node {
+            background: rgba(18, 27, 22, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .completed-node {
+            background: rgba(107, 251, 154, 0.1);
+            border: 1px solid rgba(107, 251, 154, 0.4);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex bg-background pb-20 md:pb-0 relative">
+<!-- Atmospheric Background -->
+<div class="fixed inset-0 z-[-1] bg-[#0b110e]">
+<div class="absolute inset-0 bg-gradient-to-br from-[#062c1d]/30 to-transparent"></div>
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+</div>
+<!-- SideNavBar (Desktop) -->
+<aside class="fixed left-0 top-0 h-full w-64 hidden md:flex flex-col bg-[#0f1613] border-r border-white/5 p-lg z-40">
+<div class="mb-xl flex items-center gap-sm px-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="font-display-lg text-white text-2xl tracking-tighter font-bold">Eco<span class="text-primary">Quest</span></span>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps">Dashboard</span>
+</a>
+<!-- Active: Journey -->
+<a class="nav-item active flex items-center gap-md px-md py-3 rounded-r-lg transition-colors font-bold" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps font-bold">Journey</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps">Quests</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-caps">Leaderboard</span>
+</a>
+</nav>
+<div class="mt-auto glass-card rounded-2xl p-lg text-center relative overflow-hidden border-primary/20">
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-12 h-12 mb-sm flex items-center justify-center rounded-full bg-primary/20 border border-primary/30">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<h4 class="text-white font-bold mb-1">New Quest Available</h4>
+<p class="text-xs text-on-surface-variant mb-4">Every action counts!</p>
+<button class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-label-caps py-2 rounded-lg transition-colors font-bold shadow-[0_0_15px_rgba(107,251,154,0.3)]">
+                Join Now
+            </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col w-full md:pl-64 min-h-screen relative z-10">
+<!-- Top Header -->
+<header class="w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-lg z-30 sticky top-0 bg-[#0b110e]/80 backdrop-blur-md border-b border-white/5">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-2xl md:text-3xl text-white font-bold flex items-center gap-2">
+                Your <span class="text-primary glow-text">Eco Journey</span>
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">map</span>
+</h1>
+<p class="text-on-surface-variant text-sm mt-1">Track your progress to Planet Champion.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-tertiary font-label-caps text-xs font-bold">7 Day Streak</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-error rounded-full border border-[#0b110e]"></span>
+</button>
+<img alt="Eco Guardian Profile" class="w-10 h-10 rounded-full border-2 border-primary/50 object-cover cursor-pointer" data-alt="A stylized, high-quality digital avatar of an environmental guardian character in a deep forest setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhdd1PWHn-ZfwuTMQDcsMBfR_5ij0qGqw2kwZqhFm99fQKSmTgTvH_CHfCYpNLqe9j5gOuUA9d0QzASSfsBqbcg8syoKrQ2i2Ra8QdEQwk5Z9QERMM8fZ3eBVb7IsglBa9iKm8hl6yUn8qYozDmUnQJpIVIWZtiWxupLYPCnSkEHvWfxrSgZ7ixS84d0mt6BT_8bxbgwn24F_TddJ3yP02bXuR5yGESe46I5SImLMBwrmHKH2bovfw9w"/>
+</div>
+</header>
+<!-- Canvas for Journey and Stats -->
+<main class="flex-grow flex flex-col lg:flex-row p-margin-mobile md:p-margin-desktop gap-lg min-h-[800px]">
+<!-- Journey Path Area -->
+<section class="flex-1 relative flex flex-col items-center py-xl bg-surface/30 rounded-3xl border border-white/5 overflow-hidden">
+<!-- Winding Path SVG -->
+<svg class="absolute top-0 bottom-0 w-full h-[1000px] z-0" preserveaspectratio="xMidYMid slice" viewbox="0 0 200 1000">
+<!-- Base Path -->
+<path d="M100,50 C150,200 50,400 100,600 C150,800 50,950 100,950" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="8"></path>
+<!-- Active Path -->
+<path class="path-line" d="M100,50 C150,200 50,400 100,600 C150,800 50,950 100,950" fill="none" stroke="rgba(107, 251, 154, 0.4)" stroke-linecap="round" stroke-width="8"></path>
+</svg>
+<!-- Nodes Container -->
+<div class="relative z-10 w-full max-w-md flex flex-col items-center gap-32 py-12">
+<!-- Node 5: Planet Champion (Locked) -->
+<div class="relative flex flex-col items-center opacity-60 ml-16 bounce-hover cursor-not-allowed">
+<div class="w-16 h-16 rounded-full locked-node flex items-center justify-center mb-sm backdrop-blur-md">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="font-title-md text-sm text-outline text-center font-bold tracking-wider uppercase">Planet Champion</span>
+<span class="text-xs text-on-surface-variant mt-1">Level 20</span>
+</div>
+<!-- Node 4: Eco Warrior (Locked) -->
+<div class="relative flex flex-col items-center opacity-60 mr-24 bounce-hover cursor-not-allowed">
+<div class="w-16 h-16 rounded-full locked-node flex items-center justify-center mb-sm backdrop-blur-md">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<span class="font-title-md text-sm text-outline text-center font-bold tracking-wider uppercase">Eco Warrior</span>
+<span class="text-xs text-on-surface-variant mt-1">Level 15</span>
+</div>
+<!-- Node 3: Eco Guardian (Current) -->
+<div class="relative flex flex-col items-center ml-12 transform scale-110 z-20">
+<div class="hero-glow"></div>
+<div class="w-24 h-24 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-sm node-glow cursor-pointer hover:scale-105 transition-transform border-4 border-[#0b110e]">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<span class="font-title-md text-lg text-primary text-center font-bold glow-text">Eco Guardian</span>
+<span class="text-xs text-white font-label-caps mt-1 bg-primary/20 px-2 py-1 rounded-md border border-primary/30">CURRENT LEVEL (12)</span>
+<!-- Popover Info -->
+<div class="absolute -right-48 top-4 glass-card p-4 rounded-xl hidden xl:block w-40 border-primary/30">
+<h5 class="text-white font-bold text-sm mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">target</span> Next Milestone</h5>
+<p class="text-xs text-on-surface-variant">Reach 3,000 EcoXP to unlock Eco Warrior.</p>
+</div>
+</div>
+<!-- Node 2: Green Explorer (Completed) -->
+<div class="relative flex flex-col items-center mr-16 bounce-hover cursor-pointer">
+<div class="w-16 h-16 rounded-full completed-node flex items-center justify-center mb-sm backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">hiking</span>
+</div>
+<span class="font-title-md text-sm text-white/90 text-center font-bold">Green Explorer</span>
+<span class="text-xs text-primary mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">check_circle</span> Completed</span>
+</div>
+<!-- Node 1: Eco Beginner (Completed) -->
+<div class="relative flex flex-col items-center ml-4 bounce-hover cursor-pointer">
+<div class="w-16 h-16 rounded-full completed-node flex items-center justify-center mb-sm backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
+</div>
+<span class="font-title-md text-sm text-white/90 text-center font-bold">Eco Beginner</span>
+<span class="text-xs text-primary mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">check_circle</span> Completed</span>
+</div>
+</div>
+</section>
+<!-- Stats Sidebar Area -->
+<aside class="w-full lg:w-[350px] flex flex-col gap-6">
+<!-- Rank Card -->
+<div class="glass-card p-6 rounded-3xl relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-[30px] pointer-events-none"></div>
+<h2 class="font-title-md text-lg text-white font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">emoji_events</span> Pune Rank
+                </h2>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="font-display-lg text-5xl text-white font-bold glow-text">#42</span>
+<span class="font-body-md text-sm text-on-surface-variant">of 10,000</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-xs text-on-surface-variant">To Next Rank</span>
+<span class="font-label-caps text-xs text-primary font-bold">150 XP</span>
+</div>
+<!-- Custom XP Bar -->
+<div class="w-full bg-white/5 rounded-full h-3 overflow-hidden border border-white/10">
+<div class="bg-gradient-to-r from-primary to-[#4ade80] h-full rounded-full relative" style="width: 75%">
+<div class="absolute inset-0 bg-white/20 w-1/4 animate-[pulse_2s_infinite] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Actions Card -->
+<div class="glass-card p-6 rounded-3xl flex-grow">
+<h3 class="font-title-md text-lg text-white font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span> Recent Actions
+                </h3>
+<ul class="flex flex-col gap-3">
+<!-- Action 1 -->
+<li class="flex items-center gap-4 bg-white/5 p-3 rounded-xl border border-white/5 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center border border-tertiary/20 group-hover:bg-tertiary/20 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">recycling</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-white leading-tight mb-1">Recycled 5 Bottles</p>
+<p class="text-xs text-on-surface-variant">Today, 2:30 PM</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-xs text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">+25 XP</p>
+</div>
+</li>
+<!-- Action 2 -->
+<li class="flex items-center gap-4 bg-white/5 p-3 rounded-xl border border-white/5 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">directions_walk</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-white leading-tight mb-1">Walked 2km</p>
+<p class="text-xs text-on-surface-variant">Yesterday, 9:15 AM</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-xs text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">+10 XP</p>
+</div>
+</li>
+<!-- Action 3 -->
+<li class="flex items-center gap-4 bg-white/5 p-3 rounded-xl border border-white/5 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings: 'FILL' 1;">compost</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-white leading-tight mb-1">Compost Started</p>
+<p class="text-xs text-on-surface-variant">Oct 12, 4:00 PM</p>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-xs text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">+50 XP</p>
+</div>
+</li>
+</ul>
+<button class="w-full mt-4 py-2 border border-white/10 rounded-xl text-sm text-on-surface-variant hover:text-white hover:bg-white/5 transition-colors">View Full History</button>
+</div>
+</aside>
+</main>
+<!-- Footer (Desktop) -->
+<footer class="w-full py-6 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center bg-[#0b110e]/90 border-t border-white/5 z-10 text-xs">
+<div class="font-label-caps text-primary/70 mb-2 md:mb-0 font-bold">EcoQuest</div>
+<div class="text-on-surface-variant mb-2 md:mb-0">© 2024 EcoQuest Forest Initiative</div>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Impact Stats</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Tree Counter</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Global Offset</a>
+</div>
+</footer>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#0f1613]/90 backdrop-blur-xl border-t border-white/10 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-caps mt-1 text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary px-4 py-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-caps mt-1 text-[10px] font-bold">Path</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">assignment</span>
+<span class="font-label-caps mt-1 text-[10px]">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">leaderboard</span>
+<span class="font-label-caps mt-1 text-[10px]">Rank</span>
+</a>
+</nav>
+</body></html>

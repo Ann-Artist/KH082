@@ -1,0 +1,35 @@
+[
+  {
+    "id": "camp_pune_green_october",
+    "title": "Pune Green Citizen Campaign",
+    "sponsor": "Pune Municipal Corporation (PMC)",
+    "description": "Complete 10 verified eco-quests + earn 500 EcoXP + maintain a 7-day streak to claim the Green Citizen Certificate & Pune Bus Pass 20% Discount Voucher.",
+    "requiredXP": 500,
+    "requiredActions": 10,
+    "requiredStreak": 7,
+    "rewardValue": "PMC E-Certificate & PMPML Bus Pass 20% Discount",
+    "validUntil": "31 Oct 2026"
+  },
+  {
+    "id": "camp_tree_pune_champion",
+    "title": "Deccan Tree Guardian Campaign",
+    "sponsor": "Pune Urban Forest Cell",
+    "description": "Plant or care for at least 2 saplings in Pune urban green zones and reach Level 3 Green Explorer status.",
+    "requiredXP": 400,
+    "requiredActions": 2,
+    "requiredStreak": 3,
+    "rewardValue": "Free Native Sapling Kit & Organic Fertilizer",
+    "validUntil": "15 Nov 2026"
+  },
+  {
+    "id": "camp_metro_warrior",
+    "title": "Pune Metro Eco Commuter Rewards",
+    "sponsor": "MahaMetro Pune",
+    "description": "Log 5 verified Metro trips using Level 2 GPS verification.",
+    "requiredXP": 750,
+    "requiredActions": 5,
+    "requiredStreak": 5,
+    "rewardValue": "Pune Metro Card 50 Bonus Points",
+    "validUntil": "30 Nov 2026"
+  }
+]

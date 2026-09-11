@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoQuest Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@600&amp;family=Hanken+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#a8cfb9",
+                        "surface-dim": "#131412",
+                        "secondary-container": "#2a4e3d",
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-fixed-dim": "#4de082",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-background": "#e4e2de",
+                        "on-surface": "#e4e2de",
+                        "surface-container-highest": "#343533",
+                        "surface-bright": "#393937",
+                        "primary-container": "#4ade80",
+                        "surface-variant": "#343533",
+                        "on-secondary-fixed-variant": "#2a4e3d",
+                        "surface-container-lowest": "#0e0e0d",
+                        "on-primary-fixed-variant": "#005227",
+                        "on-error": "#690005",
+                        "on-primary-container": "#005e2d",
+                        "surface-tint": "#4de082",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary": "#003919",
+                        "primary": "#6bfb9a",
+                        "surface-container-high": "#2a2a28",
+                        "inverse-primary": "#006d36",
+                        "tertiary": "#ffdab2",
+                        "primary-fixed": "#6dfe9c",
+                        "surface-container": "#1f201e",
+                        "on-secondary": "#133727",
+                        "surface-container-low": "#1b1c1a",
+                        "tertiary-container": "#ffb657",
+                        "error": "#ffb4ab",
+                        "background": "#0b110e", /* Deepened background */
+                        "inverse-surface": "#e4e2de",
+                        "on-secondary-container": "#97bea8",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#734700",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#bccabb",
+                        "on-tertiary-fixed": "#2a1700",
+                        "outline": "#869486",
+                        "secondary-fixed-dim": "#a8cfb9",
+                        "outline-variant": "#3d4a3e",
+                        "surface": "#131815", /* Sleek surface */
+                        "inverse-on-surface": "#30312e",
+                        "secondary-fixed": "#c4ecd4",
+                        "on-primary-fixed": "#00210c",
+                        "on-tertiary": "#472a00",
+                        "card-bg": "#121b16"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "sm": "8px"
+                    },
+                    fontFamily: {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "stats-number": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b110e;
+            color: #e4e2de;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(18, 27, 22, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(107, 251, 154, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(107, 251, 154, 0.3);
+            box-shadow: 0 0 20px rgba(107, 251, 154, 0.05);
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, rgba(18, 27, 22, 0.9) 0%, rgba(6, 44, 29, 0.8) 100%);
+            border: 1px solid rgba(107, 251, 154, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(107, 251, 154, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
+        .xp-ring {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 85;
+            transition: stroke-dashoffset 1s ease-in-out;
+            filter: drop-shadow(0 0 8px rgba(107, 251, 154, 0.6));
+        }
+
+        .bounce-hover:hover {
+            transform: scale(1.02) translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 12px rgba(107, 251, 154, 0.4);
+        }
+        
+        .chart-line {
+            fill: none;
+            stroke: #6bfb9a;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 4px 6px rgba(107, 251, 154, 0.3));
+        }
+
+        .chart-area {
+            fill: url(#gradient);
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-fill {
+            background: linear-gradient(90deg, #6bfb9a, #4ade80, #6bfb9a);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(107, 251, 154, 0.15) 0%, transparent 100%);
+            border-left: 3px solid #6bfb9a;
+            color: #6bfb9a;
+        }
+
+        /* Task Card Gradients */
+        .task-card-1 { border-color: rgba(107, 251, 154, 0.3); }
+        .task-card-1 .task-icon { background: rgba(107, 251, 154, 0.1); color: #6bfb9a; }
+        .task-card-2 { border-color: rgba(255, 182, 87, 0.3); }
+        .task-card-2 .task-icon { background: rgba(255, 182, 87, 0.1); color: #ffb657; }
+        .task-card-3 { border-color: rgba(168, 85, 247, 0.3); }
+        .task-card-3 .task-icon { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+    </style>
+</head>
+<body class="font-body-md antialiased min-h-screen flex bg-background pb-20 md:pb-0">
+<!-- SideNavBar (Desktop) -->
+<aside class="fixed left-0 top-0 h-full w-64 hidden md:flex flex-col bg-[#0f1613] border-r border-white/5 p-lg z-40">
+<div class="mb-xl flex items-center gap-sm px-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="font-display-lg text-white text-2xl tracking-tighter font-bold">Eco<span class="text-primary">Quest</span></span>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<!-- Active: Dashboard -->
+<a class="nav-item active flex items-center gap-md px-md py-3 rounded-r-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps font-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps">Journey</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps">Quests</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 text-on-surface-variant hover:text-primary hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-caps">Leaderboard</span>
+</a>
+</nav>
+<div class="mt-auto glass-card rounded-2xl p-lg text-center relative overflow-hidden border-primary/20">
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-12 h-12 mb-sm flex items-center justify-center rounded-full bg-primary/20 border border-primary/30">
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<h4 class="text-white font-bold mb-1">New Quest Available</h4>
+<p class="text-xs text-on-surface-variant mb-4">Every action counts!</p>
+<button class="w-full bg-primary hover:bg-primary-fixed text-on-primary font-label-caps py-2 rounded-lg transition-colors font-bold shadow-[0_0_15px_rgba(107,251,154,0.3)]">
+                Join Now
+            </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col w-full md:pl-64 min-h-screen">
+<!-- Top Header -->
+<header class="w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-lg z-30">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-2xl md:text-3xl text-white font-bold flex items-center gap-2">
+                Good morning, <span class="text-primary glow-text">Eco Guardian!</span>
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</h1>
+<p class="text-on-surface-variant text-sm mt-1">Pune is breathing easier because of you.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-tertiary font-label-caps text-xs font-bold">7 Day Streak</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-error rounded-full border border-[#0b110e]"></span>
+</button>
+<img alt="Eco Guardian Profile" class="w-10 h-10 rounded-full border-2 border-primary/50 object-cover cursor-pointer" data-alt="A stylized, high-quality digital avatar of an environmental guardian character in a deep forest setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhdd1PWHn-ZfwuTMQDcsMBfR_5ij0qGqw2kwZqhFm99fQKSmTgTvH_CHfCYpNLqe9j5gOuUA9d0QzASSfsBqbcg8syoKrQ2i2Ra8QdEQwk5Z9QERMM8fZ3eBVb7IsglBa9iKm8hl6yUn8qYozDmUnQJpIVIWZtiWxupLYPCnSkEHvWfxrSgZ7ixS84d0mt6BT_8bxbgwn24F_TddJ3yP02bXuR5yGESe46I5SImLMBwrmHKH2bovfw9w"/>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<main class="flex-grow px-margin-mobile md:px-margin-desktop pb-xl">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column (Span 2) -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Hero Section -->
+<section class="hero-card rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="hero-glow"></div>
+<div class="relative w-48 h-48 flex-shrink-0 flex items-center justify-center bounce-hover z-10">
+<svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_20px_rgba(107,251,154,0.4)]" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+<circle class="xp-ring" cx="50" cy="50" fill="none" r="45" stroke="url(#xp-gradient)" stroke-linecap="round" stroke-width="6"></circle>
+<defs>
+<lineargradient id="xp-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#6bfb9a"></stop>
+<stop offset="100%" stop-color="#4ade80"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-1" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+</div>
+<div class="flex-1 z-10 flex flex-col justify-center w-full">
+<span class="text-primary font-label-caps text-xs tracking-wider mb-2">LEVEL 12</span>
+<h2 class="text-4xl font-bold text-white mb-4">Eco Guardian</h2>
+<div class="w-full bg-white/5 rounded-full h-2 mb-2 overflow-hidden border border-white/10">
+<div class="bg-primary h-full rounded-full" style="width: 70%"></div>
+</div>
+<div class="flex justify-between text-xs text-on-surface-variant font-label-caps">
+<span>2,450 / 3,000 EcoXP</span>
+<span>"Protect our planet!"</span>
+</div>
+</div>
+</section>
+<!-- Daily Challenges -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-title-md text-lg text-white font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">flag</span>
+                            Today's Quests
+                        </h3>
+<a class="text-on-surface-variant hover:text-primary text-sm flex items-center gap-1 transition-colors" href="#">
+                            View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Task 1 -->
+<div class="glass-card task-card-1 rounded-2xl p-5 flex flex-col gap-3 group cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl task-icon flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_transit</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm mb-1">Pune Metro</h4>
+<p class="text-xs text-on-surface-variant leading-tight">Log your public transit trip today.</p>
+</div>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="text-primary text-xs font-bold bg-primary/10 px-2 py-1 rounded-md">+50 XP</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Task 2 -->
+<div class="glass-card task-card-2 rounded-2xl p-5 flex flex-col gap-3 group cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl task-icon flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">compost</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm mb-1">Compost Waste</h4>
+<p class="text-xs text-on-surface-variant leading-tight">Dispose of wet waste sustainably.</p>
+</div>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between">
+<span class="text-tertiary text-xs font-bold bg-tertiary/10 px-2 py-1 rounded-md">+30 XP</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-tertiary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Task 3 -->
+<div class="glass-card task-card-3 rounded-2xl p-5 flex flex-col gap-3 group cursor-pointer relative overflow-hidden border-primary/30">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 h-12 rounded-xl bg-primary text-[#0b110e] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="text-white font-bold text-sm mb-1 line-through opacity-70">Reusable Bag</h4>
+<p class="text-xs text-primary leading-tight">Completed! Great job.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Weekly Growth -->
+<div class="glass-card rounded-2xl p-6 flex-grow flex flex-col mt-2">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-title-md text-lg text-white font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+                            Weekly EcoXP Growth
+                        </h3>
+<button class="text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="relative w-full h-40 mt-auto">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 100">
+<defs>
+<lineargradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="rgba(107,251,154,0.2)"></stop>
+<stop offset="100%" stop-color="rgba(107,251,154,0)"></stop>
+</lineargradient>
+</defs>
+<path class="chart-area" d="M0,100 L0,80 C50,80 100,50 150,60 C200,70 250,20 300,30 C350,40 380,10 400,5 L400,100 Z"></path>
+<path class="chart-line" d="M0,80 C50,80 100,50 150,60 C200,70 250,20 300,30 C350,40 380,10 400,5"></path>
+<circle cx="150" cy="60" fill="#0b110e" r="4" stroke="#6bfb9a" stroke-width="2"></circle>
+<circle cx="250" cy="20" fill="#0b110e" r="4" stroke="#6bfb9a" stroke-width="2"></circle>
+<circle cx="300" cy="30" fill="#0b110e" r="4" stroke="#6bfb9a" stroke-width="2"></circle>
+<circle class="shadow-lg" cx="400" cy="5" fill="#6bfb9a" r="5" stroke="#fff" stroke-width="1"></circle>
+</svg>
+<div class="absolute bottom-0 w-full flex justify-between px-2 text-[10px] text-on-surface-variant font-label-caps mt-2">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Span 1) -->
+<div class="flex flex-col gap-6">
+<!-- Impact Stats Section -->
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-4">
+<h3 class="font-title-md text-lg text-white font-bold flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">public</span>
+                        Your Impact
+                    </h3>
+<!-- Stat 1 -->
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">co2</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold text-white">124 <span class="text-sm font-normal text-on-surface-variant">kg</span></h4>
+<p class="text-xs text-primary font-label-caps uppercase mt-1">Carbon Offset</p>
+</div>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-tertiary/10 to-transparent opacity-50"></div>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold text-white">7 <span class="text-sm font-normal text-on-surface-variant">Days</span></h4>
+<p class="text-xs text-tertiary font-label-caps uppercase mt-1">Active Streak</p>
+</div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-white/5 rounded-2xl p-4 border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-xl" style="font-variation-settings: 'FILL' 1;">forest</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold text-white">4</h4>
+<p class="text-xs text-secondary font-label-caps uppercase mt-1">Trees Planted</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/10 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">energy_savings_leaf</span>
+<p class="text-sm text-on-surface-variant leading-tight">Small steps today, greener tomorrow. Keep it up!</p>
+</div>
+</div>
+<!-- Quick Tip / Additional Card -->
+<div class="glass-card rounded-2xl p-6 border-l-4 border-l-primary flex gap-4 mt-auto">
+<span class="material-symbols-outlined text-primary text-3xl">tips_and_updates</span>
+<div>
+<h4 class="text-white font-bold mb-1">Eco Tip of the Day</h4>
+<p class="text-sm text-on-surface-variant">Turning off lights and using public transport makes a huge impact.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#0f1613]/90 backdrop-blur-xl border-t border-white/10 md:hidden">
+<a class="flex flex-col items-center justify-center text-primary px-4 py-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps mt-1 text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">map</span>
+<span class="font-label-caps mt-1 text-[10px]">Path</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">assignment</span>
+<span class="font-label-caps mt-1 text-[10px]">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">leaderboard</span>
+<span class="font-label-caps mt-1 text-[10px]">Rank</span>
+</a>
+</nav>
+</body></html>

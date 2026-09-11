@@ -1,0 +1,44 @@
+{
+  "transportation": {
+    "carKgCO2ePerKm": 0.21,
+    "bikeKgCO2ePerKm": 0.09,
+    "busKgCO2ePerTrip": 0.75,
+    "metroKgCO2ePerTrip": 0.35,
+    "walkCycleOffsetPerKm": 0.18
+  },
+  "electricity": {
+    "kgCO2ePerKwh": 0.82,
+    "puneAverageKwh": 180
+  },
+  "food": {
+    "veganBaseKg": 60,
+    "vegetarianBaseKg": 95,
+    "balancedBaseKg": 140,
+    "meatHeavyBaseKg": 210,
+    "wasteMultiplier": {
+      "never": 1.0,
+      "rarely": 1.1,
+      "sometimes": 1.25,
+      "frequently": 1.45
+    }
+  },
+  "shopping": {
+    "clothingKgPerItem": 12.5,
+    "electronicsKgPerYear": 85.0,
+    "generalShoppingKg": {
+      "low": 20,
+      "moderate": 55,
+      "high": 110
+    }
+  },
+  "waste": {
+    "plasticKg": {
+      "low": 10,
+      "moderate": 28,
+      "high": 60
+    },
+    "segregationDiscount": 0.25,
+    "compostDiscount": 0.15,
+    "recyclingDiscount": 0.10
+  }
+}
