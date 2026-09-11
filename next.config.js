@@ -6,7 +6,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: 'standalone',
+  async rewrites() {
+    return [
+      {
+        source: '/index.html',
+        destination: '/dashboard',
+      },
+      {
+        source: '/404.html',
+        destination: '/dashboard',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

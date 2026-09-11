@@ -25,7 +25,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const user = propUser || getStoredUserProfile();
   const activePath = propPath || pathname || '/dashboard';
 
-  const handleNav = (path: string) => {
+  const handleNav = (path: string, e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
     if (typeof onNavigate === 'function') {
       onNavigate(path);
     } else {
@@ -109,8 +110,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           return (
             <button
               key={item.path}
-              onClick={() => handleNav(item.path)}
-              className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-xs font-semibold transition-all ${
+              type="button"
+              onClick={(e) => handleNav(item.path, e)}
+              className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
                 isActive
                   ? 'bg-white/10 text-white font-bold border border-white/15 shadow-sm'
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
@@ -139,8 +141,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <button
-          onClick={() => handleNav('/profile')}
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all ${
+          type="button"
+          onClick={(e) => handleNav('/profile', e)}
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
             activePath === '/profile'
               ? 'bg-white/10 text-white font-bold border border-white/15'
               : 'text-gray-400 hover:bg-white/5 hover:text-white'
