@@ -29,12 +29,12 @@ export const QuestCard: React.FC<QuestCardProps> = ({
   const vBadge = getVerificationBadge();
 
   return (
-    <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121b16]/80 p-5 backdrop-blur-xl transition-all duration-300 hover:border-[#6bfb9a]/40 hover:shadow-[0_0_20px_rgba(107,251,154,0.08)]">
+    <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e2e8e3] bg-white p-5 text-gray-900 shadow-sm transition-all duration-300 hover:shadow-md">
       <div>
         {/* Header Badges */}
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <span className="flex items-center gap-1 rounded-full border border-[#ffd23f]/30 bg-[#ffd23f]/10 px-2.5 py-0.5 font-mono text-xs font-bold text-[#ffd23f]">
-            <span className="material-symbols-outlined text-sm">stars</span>
+          <span className="flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2.5 py-0.5 font-mono text-xs font-extrabold text-amber-700">
+            <span className="material-symbols-outlined text-sm text-amber-500">stars</span>
             +{quest.xpReward} XP
           </span>
 
@@ -46,45 +46,45 @@ export const QuestCard: React.FC<QuestCardProps> = ({
 
         {/* Title & Icon */}
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6bfb9a]/10 text-[#6bfb9a]">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#10b981] border border-emerald-200">
             <span className="material-symbols-outlined text-2xl">{quest.icon}</span>
           </div>
           <div>
-            <h3 className="font-title-md text-base font-bold text-white group-hover:text-[#6bfb9a] transition-colors">
+            <h3 className="text-base font-bold text-gray-900 group-hover:text-[#10b981] transition-colors">
               {quest.title}
             </h3>
-            <p className="mt-1 text-xs text-[#bccabb] line-clamp-2">{quest.description}</p>
+            <p className="mt-1 text-xs text-gray-500 line-clamp-2">{quest.description}</p>
           </div>
         </div>
 
         {/* Quest Info Chips */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] font-mono text-[#bccabb]">
-          <span className="rounded-md bg-white/5 px-2 py-0.5 uppercase">🌱 -{quest.co2ImpactKg} kg CO₂e</span>
-          <span className="rounded-md bg-white/5 px-2 py-0.5 uppercase">⏱️ {quest.duration}</span>
-          <span className="rounded-md bg-white/5 px-2 py-0.5 uppercase">⚡ {quest.difficulty}</span>
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] font-mono text-gray-600">
+          <span className="rounded-md bg-gray-100 px-2 py-0.5 uppercase font-semibold">🌱 -{quest.co2ImpactKg} kg CO₂e</span>
+          <span className="rounded-md bg-gray-100 px-2 py-0.5 uppercase font-semibold">⏱️ {quest.duration}</span>
+          <span className="rounded-md bg-gray-100 px-2 py-0.5 uppercase font-semibold">⚡ {quest.difficulty}</span>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-5 pt-3 border-t border-white/5 flex items-center gap-2">
+      <div className="mt-5 pt-3 border-t border-gray-100 flex items-center gap-2">
         {status === 'completed' ? (
-          <div className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/15 py-2 text-xs font-bold text-emerald-400">
-            <span className="material-symbols-outlined text-base">check_circle</span>
+          <div className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-emerald-300 bg-emerald-50 py-2 text-xs font-bold text-emerald-700">
+            <span className="material-symbols-outlined text-base text-emerald-600">check_circle</span>
             <span>Completed</span>
           </div>
         ) : status === 'active' ? (
           <div className="flex w-full items-center gap-2">
             <button
               onClick={() => onComplete(quest)}
-              className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#6bfb9a] py-2 text-xs font-bold text-[#003919] hover:bg-[#58e288] transition-colors"
+              className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#111827] py-2 text-xs font-bold text-white hover:bg-black transition-colors shadow-sm"
             >
-              <span className="material-symbols-outlined text-base">task_alt</span>
+              <span className="material-symbols-outlined text-base text-[#10b981]">task_alt</span>
               <span>Submit Proof</span>
             </button>
             <button
               onClick={() => onCantDo(quest)}
               title="Can't do this - Get AI Alternative"
-              className="flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-2.5 py-2 text-xs text-[#bccabb] hover:bg-white/10 hover:text-white"
+              className="flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 px-2.5 py-2 text-xs text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <span className="material-symbols-outlined text-base">swap_horiz</span>
             </button>
@@ -93,15 +93,15 @@ export const QuestCard: React.FC<QuestCardProps> = ({
           <div className="flex w-full items-center gap-2">
             <button
               onClick={() => onAccept(quest.id)}
-              className="flex flex-1 items-center justify-center gap-1 rounded-xl border border-[#6bfb9a]/40 bg-[#6bfb9a]/10 py-2 text-xs font-bold text-[#6bfb9a] hover:bg-[#6bfb9a]/20 transition-colors"
+              className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#111827] py-2 text-xs font-bold text-white hover:bg-black transition-colors shadow-sm"
             >
-              <span className="material-symbols-outlined text-base">add_circle</span>
+              <span className="material-symbols-outlined text-base text-[#10b981]">add_circle</span>
               <span>Accept Quest</span>
             </button>
             <button
               onClick={() => onCantDo(quest)}
               title="Can't do this - Get AI Alternative"
-              className="flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-2.5 py-2 text-xs text-[#bccabb] hover:bg-white/10 hover:text-white"
+              className="flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 px-2.5 py-2 text-xs text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <span className="material-symbols-outlined text-base">swap_horiz</span>
             </button>

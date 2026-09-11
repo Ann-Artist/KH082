@@ -135,14 +135,14 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-[#6bfb9a]/30 bg-[#121b16] p-6 shadow-2xl">
+      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-2xl text-[#6bfb9a]">verified_user</span>
-            <h2 className="font-headline-lg text-lg font-bold text-white">{quest.title}</h2>
+            <span className="material-symbols-outlined text-2xl text-[#10b981]">verified_user</span>
+            <h2 className="text-lg font-extrabold text-gray-900">{quest.title}</h2>
           </div>
-          <button onClick={onClose} className="text-[#bccabb] hover:text-white">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
@@ -285,8 +285,8 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
             <button
               onClick={handleStartVerification}
               disabled={quest.verificationType === 'level_2_gps' && gpsStage !== 'completed'}
-              className={`w-full rounded-2xl border border-[#6bfb9a]/40 bg-[#6bfb9a] py-3 font-bold text-[#003919] transition-all ${
-                quest.verificationType === 'level_2_gps' && gpsStage !== 'completed' ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#59e68a]'
+              className={`w-full rounded-2xl bg-[#111827] py-3 font-bold text-white transition-all shadow-sm ${
+                quest.verificationType === 'level_2_gps' && gpsStage !== 'completed' ? 'opacity-50 cursor-not-allowed' : 'hover:bg-black'
               }`}
             >
               Run AI Vision & EcoGuard Anti-Cheat Check
@@ -297,9 +297,9 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
         {/* Step 2: Scanning Simulation */}
         {step === 'scanning' && (
           <div className="py-12 text-center">
-            <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-[#6bfb9a]/20 border-t-[#6bfb9a]" />
-            <p className="mt-4 font-mono text-sm text-[#6bfb9a] animate-pulse">Running AI Vision & EcoGuard Anti-Cheat Audit...</p>
-            <p className="mt-1 text-xs text-[#bccabb]">Section 21 Checks: Duplicate images, suspicious timestamps, location mismatch</p>
+            <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-gray-200 border-t-[#10b981]" />
+            <p className="mt-4 font-mono text-sm font-bold text-gray-900 animate-pulse">Running AI Vision & EcoGuard Anti-Cheat Audit...</p>
+            <p className="mt-1 text-xs text-gray-500">Section 21 Checks: Duplicate images, suspicious timestamps, location mismatch</p>
           </div>
         )}
 
@@ -309,25 +309,25 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
             <div
               className={`rounded-2xl border p-4 text-center ${
                 auditResult.submission.aiVerdict === 'Approved'
-                  ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
-                  : 'border-yellow-500/40 bg-yellow-500/10 text-yellow-300'
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+                  : 'border-amber-200 bg-amber-50 text-amber-900'
               }`}
             >
-              <span className="material-symbols-outlined text-4xl">
+              <span className="material-symbols-outlined text-4xl text-emerald-600">
                 {auditResult.submission.aiVerdict === 'Approved' ? 'check_circle' : 'warning'}
               </span>
-              <h3 className="font-title-md text-lg font-bold">
+              <h3 className="text-lg font-extrabold text-gray-900">
                 EcoGuard Verdict: {auditResult.submission.aiVerdict}
               </h3>
-              <p className="mt-1 text-xs font-mono">
+              <p className="mt-1 text-xs font-mono font-semibold text-emerald-700">
                 AI Vision Confidence: {Math.round(auditResult.submission.aiConfidence * 100)}%
               </p>
-              <p className="mt-2 text-xs">{auditResult.submission.aiNotes}</p>
+              <p className="mt-2 text-xs text-gray-600">{auditResult.submission.aiNotes}</p>
             </div>
 
             <button
               onClick={handleFinalSubmit}
-              className="w-full rounded-2xl border border-[#6bfb9a]/40 bg-[#6bfb9a] py-3 font-bold text-[#003919] hover:bg-[#59e68a] transition-all"
+              className="w-full rounded-2xl bg-[#111827] py-3 font-bold text-white hover:bg-black transition-all shadow-sm"
             >
               Claim +{quest.xpReward} EcoXP & Update Streak
             </button>
